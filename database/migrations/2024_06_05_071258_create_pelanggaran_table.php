@@ -13,14 +13,18 @@ return new class extends Migration
     {
         Schema::create('pelanggaran', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students');
-            $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('sanction_id')->constrained('sanctions');
-            $table->foreignId('teacher_id')->constrained('teachers');
+            $table->unsignedBigInteger('siswa_id');
+            $table->unsignedBigInteger('kategori_id');
+            $table->unsignedBigInteger('sanksi_id');
+            $table->unsignedBigInteger('guru_id');
             $table->date('date');
             $table->text('description')->nullable();
             $table->timestamps();
 
+            $table->foreign('siswa_id')->references('id')->on('siswa');
+            $table->foreign('kategori_id')->references('id')->on('kategoris');
+            $table->foreign('sanksi_id')->references('id')->on('sanksi');
+            $table->foreign('guru_id')->references('id')->on('pengguna'); 
         });
     }
 

@@ -1,4 +1,4 @@
-<di v id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
+<div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
     data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
     data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
@@ -22,62 +22,87 @@
                 data-kt-scroll-save-state="true">
                 <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu"
                     data-kt-menu="true" data-kt-menu-expand="false">
-                    <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                        <span class="menu-link active">
+                    <div class="menu-item">
+                        <a class="menu-link {{ Request::routeIs('admin-dashboard') ? 'active' : '' }}" href="{{ route('admin-dashboard') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-element-11 fs-2">
+                                <i class="ki-duotone ki-abstract-33 fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Dashboards</span>
-                        </span>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
                     </div>
                     <div class="menu-item pt-5">
                         <div class="menu-content">
                             <span class="menu-heading fw-bold text-uppercase fs-7">Pages</span>
                         </div>
                     </div>
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <span class="menu-link">
+                    <div class="menu-item">
+                        <a class="menu-link {{ Request::routeIs('admin-violation') ? 'active' : '' }}" href="{{ route('admin-violation') }}">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-address-book fs-2">
+                                <i class="ki-duotone ki-book-open fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
-                                    <span class="path3"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">User Profile</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <div class="menu-sub menu-sub-accordion">
-                            <div class="menu-item">
-                                <a class="menu-link" href="#">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Super Admin</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="#">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Admin</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="#">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">User</span>
-                                </a>
-                            </div>
-                        </div>
+                            <span class="menu-title">Violations</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ Request::routeIs('admin-viocategory') ? 'active' : '' }}" href="{{ route('admin-viocategory') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-filter fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Violation Categories</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ Request::routeIs('admin-sanction') ? 'active' : '' }}" href="{{ route('admin-sanction') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-note-2 fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Sanctions</span>
+                        </a>
+                    </div>
+                    <div class="menu-item active">
+                        <a class="menu-link {{ Request::routeIs('admin-student') ? 'active' : '' }}" href="{{ route('admin-student') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-teacher fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Students</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ Request::routeIs('admin-class') ? 'active' : '' }}" href="{{ route('admin-class') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-flag fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Classes</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ Request::routeIs('admin-user') ? 'active' : '' }}" href="{{ route('admin-user') }}">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-user fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Users</span>
+                        </a>
                     </div>
                     <div class="menu-item pt-5">
                         <div class="menu-content">
@@ -85,9 +110,9 @@
                         </div>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="#" target="_blank">
+                        <a class="menu-link" href="#">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-user fs-2">
+                                <i class="ki-duotone ki-setting fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
@@ -113,4 +138,4 @@
             </button>
         </form>
     </div>
-</di>
+</div>

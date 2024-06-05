@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Siswa;
+use App\Models\Pengguna;
+use App\Models\Kategori;
+use App\Models\Sanksi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Violation extends Model
+class Pelanggaran extends Model
 {
     use HasFactory;
 
@@ -13,23 +17,23 @@ class Violation extends Model
         'student_id', 'category_id', 'sanction_id', 'teacher_id', 'date', 'description'
     ];
 
-    public function student()
+    public function siswa()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Siswa::class, 'id_siswa', 'id');
     }
 
-    public function category()
+    public function pengguna()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Pengguna::class, 'id_pengguna', 'id');
     }
 
-    public function sanction()
+    public function kategori()
     {
-        return $this->belongsTo(Sanction::class);
+        return $this->belongsTo(Kategori::class, 'id_kategori', 'id');
     }
 
-    public function teacher()
+    public function sanksi()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Sanksi::class, 'id_sanksi', 'id');
     }
 }

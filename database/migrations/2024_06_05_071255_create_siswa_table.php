@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('nis')->unique();
-            $table->foreignId('class_id')->constrained('classes');
+            $table->unsignedBigInteger('kelas_id');
             $table->timestamps();
+
+            $table->foreign('kelas_id')->references('id')->on('kelas');
         });
     }
 

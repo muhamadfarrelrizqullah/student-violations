@@ -2,7 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PelanggaranController;
+use App\Http\Controllers\SanksiController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\PenggunaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,20 +20,29 @@ use App\Http\Controllers\LogoutController;
 |
 */
 
+//Landing
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::post('/autentikasi', [LoginController::class, 'autentikasi']);
+//Autentikasi
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/auth', [LoginController::class, 'autentikasi']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-});
+//Admin
+Route::get('/admin/dashboard', [LoginController::class, 'admin'])->name('admin-dashboard');
+Route::get('/admin/violation', [PelanggaranController::class, 'index'])->name('admin-violation');
+Route::get('/admin/category', [KategoriController::class, 'index'])->name('admin-viocategory');
+Route::get('/admin/sanction', [SanksiController::class, 'index'])->name('admin-sanction');
+Route::get('/admin/student', [SiswaController::class, 'index'])->name('admin-student');
+Route::get('/admin/class', [KelasController::class, 'index'])->name('admin-class');
+Route::get('/admin/user', [PenggunaController::class, 'index'])->name('admin-user');
 
-Route::get('/guru/dashboard', function () {
-    return view('guru.dashboard');
-});
+Route::get('/category', [KategoriController::class, 'read'])->name('datakategori');
+Route::put('/category/update', [KategoriController::class, 'update'])->name('datakategori.update');
+Route::delete('/category/{id}', [KategoriController::class, 'destroy'])->name('datakategori.destroy');
+Route::post('/category/store', [KategoriController::class, 'store'])->name('datakategori.store');
+
+//Guru
+Route::get('/guru/dashboard', [LoginController::class, 'guru']);

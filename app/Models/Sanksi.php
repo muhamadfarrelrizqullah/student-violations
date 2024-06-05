@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Pelanggaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sanction extends Model
+class Sanksi extends Model
 {
     use HasFactory;
 
@@ -13,8 +14,8 @@ class Sanction extends Model
         'name', 'points'
     ];
 
-    public function violations()
+    public function pelanggaran()
     {
-        return $this->hasMany(Violation::class);
+        return $this->hasMany(Pelanggaran::class, 'id_pelanggaran', 'id');
     }
 }

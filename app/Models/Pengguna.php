@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Pelanggaran;
+use App\Models\Profil;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -25,8 +27,13 @@ class Pengguna extends Authenticatable
         'status',
     ];
 
-    public function hasRole($role)
+    public function pelanggaran()
     {
-        return $this->role === $role;
+        return $this->hasMany(Pelanggaran::class, 'id_pengguna', 'id');
+    }
+
+    public function profil()
+    {
+        return $this->hasOne(Profil::class,  'id_pengguna', 'id');
     }
 }

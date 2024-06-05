@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Pelanggaran;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Kategori extends Model
 {
     use HasFactory;
 
@@ -13,8 +14,8 @@ class Category extends Model
         'name', 'description'
     ];
 
-    public function violations()
+    public function pelanggaran()
     {
-        return $this->hasMany(Violation::class);
+        return $this->hasMany(Pelanggaran::class, 'id_pelanggaran', 'id');
     }
 }

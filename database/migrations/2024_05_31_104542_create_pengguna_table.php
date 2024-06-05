@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('password', 100);
             $table->enum('role', ['Admin', 'Guru']);
             $table->enum('status', ['Aktif', 'Tidak Aktif']);
-            $table->datetime('deleted_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

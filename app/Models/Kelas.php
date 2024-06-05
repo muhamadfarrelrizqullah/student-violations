@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Siswa;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Classes extends Model
+class Kelas extends Model
 {
     use HasFactory;
 
@@ -13,8 +14,8 @@ class Classes extends Model
         'name'
     ];
 
-    public function students()
+    public function siswa()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Siswa::class, 'id_siswa', 'id');
     }
 }

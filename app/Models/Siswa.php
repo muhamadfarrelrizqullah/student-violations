@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Pelanggaran;
+use App\Models\Kelas;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Siswa extends Model
 {
     use HasFactory;
 
@@ -13,13 +15,13 @@ class Student extends Model
         'name', 'nis', 'class_id'
     ];
 
-    public function class()
+    public function kelas()
     {
-        return $this->belongsTo(Classes::class);
+        return $this->belongsTo(Kelas::class, 'id_kelas', 'id');
     }
 
-    public function violations()
+    public function pelanggaran()
     {
-        return $this->hasMany(Violation::class);
+        return $this->hasMany(Pelanggaran::class, 'id_pelanggaran', 'id');
     }
 }

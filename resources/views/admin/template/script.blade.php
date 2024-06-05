@@ -10,5 +10,6 @@
 <script src="assets/js/custom/apps/chat/chat.js"></script>
 <script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 <script src="assets/js/custom/utilities/modals/users-search.js"></script>
+<script src="assets/plugins/custom/fontawesome/feather.min.js"></script>
 
 @stack('script')
