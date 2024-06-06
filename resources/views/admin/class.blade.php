@@ -128,12 +128,12 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name:</label>
                             <input type="text" class="form-control" id="addName" name="name"
-                                value="{{ old('name') }}" placeholder="Enter the class name">
+                                placeholder="Enter the class name">
                         </div>
                         <div class="mb-3">
                             <label for="major" class="form-label">Major:</label>
                             <input type="text" class="form-control" id="addMajor" name="major"
-                                value="{{ old('major') }}" placeholder="Enter the class major">
+                                placeholder="Enter the class major">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -224,6 +224,10 @@
             var major = $(this).data('major');
 
             modalDetail(name, major);
+        });
+
+        $('#modalTambah, #modalEdit, #modalDetail').on('hidden.bs.modal', function() {
+            $(this).find('form')[0].reset();
         });
 
         $('#modalTambah form').on('submit', function(e) {

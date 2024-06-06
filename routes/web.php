@@ -54,6 +54,11 @@ Route::put('/sanction/update', [SanksiController::class, 'update'])->name('datas
 Route::delete('/sanction/{id}', [SanksiController::class, 'destroy'])->name('datasanksi.destroy');
 Route::post('/sanction/store', [SanksiController::class, 'store'])->name('datasanksi.store');
 
+Route::get('/user', [PenggunaController::class, 'read'])->name('datapengguna');
+Route::put('/user/update', [PenggunaController::class, 'update'])->name('datapengguna.update');
+Route::delete('/user/{id}', [PenggunaController::class, 'destroy'])->name('datapengguna.destroy');
+Route::post('/user/store', [PenggunaController::class, 'store'])->name('datapengguna.store');
+
 
 //Guru
 Route::get('/guru/dashboard', [LoginController::class, 'guru']);

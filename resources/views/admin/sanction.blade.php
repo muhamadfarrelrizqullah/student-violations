@@ -128,12 +128,12 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name:</label>
                             <input type="text" class="form-control" id="addName" name="name"
-                                value="{{ old('name') }}" placeholder="Enter the sanction name">
+                                placeholder="Enter the sanction name">
                         </div>
                         <div class="mb-3">
                             <label for="points" class="form-label">Points:</label>
                             <input type="number" class="form-control" id="addPoints" name="points"
-                                value="{{ old('points') }}" placeholder="Enter the sanction points">
+                                placeholder="Enter the sanction points">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -224,6 +224,10 @@
             var points = $(this).data('points');
 
             modalDetail(name, points);
+        });
+
+        $('#modalTambah, #modalEdit, #modalDetail').on('hidden.bs.modal', function() {
+            $(this).find('form')[0].reset();
         });
 
         $('#modalTambah form').on('submit', function(e) {

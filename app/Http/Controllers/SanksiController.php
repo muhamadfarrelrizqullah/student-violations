@@ -36,10 +36,10 @@ class SanksiController extends Controller
         'points' => 'nullable|string|max:100',
     ]);
 
-    $class = new Sanksi;
-    $class->name = $request->name;
-    $class->points = $request->points;
-    $class->save();
+    $sanction = new Sanksi;
+    $sanction->name = $request->name;
+    $sanction->points = $request->points;
+    $sanction->save();
 
     return redirect()->back()->with('success', 'Sanction added successfully');
     }
@@ -53,11 +53,11 @@ class SanksiController extends Controller
                 'points' => 'nullable|string|max:100',
             ]);
 
-            $class = Sanksi::findOrFail($request->id);
+            $sanction = Sanksi::findOrFail($request->id);
 
-            $class->name = $request->name;
-            $class->points = $request->points;
-            $class->save();
+            $sanction->name = $request->name;
+            $sanction->points = $request->points;
+            $sanction->save();
 
 
             return response()->json(['success' => 'Sanction updated successfully']);
