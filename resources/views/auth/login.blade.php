@@ -111,6 +111,27 @@
     </div>
     <script>
         var hostUrl = "assets/";
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const successMessage = "{{ session('success') }}";
+            const errorMessage = "{{ session('error') }}";
+
+            if (successMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: successMessage
+                });
+            }
+
+            if (errorMessage) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: errorMessage
+                });
+            }
+        });
     </script>
     <script src="assets/plugins/global/plugins.bundle.js"></script>
     <script src="assets/js/scripts.bundle.js"></script>

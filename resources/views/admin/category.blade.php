@@ -8,7 +8,7 @@
             <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                     <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                        eCommerce Dashboard</h1>
+                        Category Data</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                         <li class="breadcrumb-item text-muted">Home</li>
                         <li class="breadcrumb-item">
@@ -18,7 +18,6 @@
                     </ul>
                 </div>
                 <div class="d-flex align-items-center gap-2 gap-lg-3">
-                    <a href="apps/ecommerce/sales/listing.html" class="btn btn-sm fw-bold btn-secondary">Manage Sales</a>
                     <button type="button" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalTambah">
                         Add Category
@@ -196,6 +195,18 @@
                     feather.replace();
                 }
             });
+
+            tabel.on('responsive-display.dt', function(e, datatable, row, showHide, update) {
+                feather.replace();
+            });
+
+            tabel.on('draw.dt', function() {
+                feather.replace();
+            });
+
+            $(window).resize(function() {
+                tabel.columns.adjust().responsive.recalc();
+            });
         });
 
         $(window).resize(function() {
@@ -215,53 +226,128 @@
             modalDetail(name, description);
         });
 
+        $('#modalTambah form').on('submit', function(e) {
+            e.preventDefault();
+            let data = $(this).serialize();
+            let form = $(this);
+
+            $.ajax({
+                url: form.attr('action'),
+                type: "POST",
+                data: data,
+                success: function(response) {
+                    console.log(response);
+                    $('#modalTambah').modal('hide');
+                    tabel.ajax.reload();
+
+                    Swal.fire(
+                        'Success!',
+                        'Category has been added.',
+                        'success'
+                    );
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseJSON.message);
+
+                    Swal.fire(
+                        'Error!',
+                        'Error adding category: ' + xhr.responseJSON.message,
+                        'error'
+                    );
+                }
+            });
+        });
+
+
         function deleteData(id) {
-            if (confirm('Are you sure you want to delete this data?')) {
-                fetch(`category/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('Deleted:', data);
-                        tabel.ajax.reload();
-                    })
-                    .catch(error => {
-                        console.error('Error deleting data:', error);
-                        alert('Error deleting data: ' + error.message);
-                    });
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`category/${id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                    'content'),
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Deleted:', data);
+                            tabel.ajax.reload();
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your data has been deleted.',
+                                'success'
+                            );
+                        })
+                        .catch(error => {
+                            console.error('Error deleting data:', error);
+                            Swal.fire(
+                                'Error!',
+                                'Error deleting data: ' + error.message,
+                                'error'
+                            );
+                        });
+                }
+            });
         }
 
         $('#formEdit').on('submit', function(e) {
             e.preventDefault();
             let data = $(this).serialize();
 
-            $.ajax({
-                url: "{{ route('datakategori.update') }}",
-                type: "POST",
-                data: data,
-                success: function(response) {
-                    console.log(response);
-                    $('#modalEdit').modal('hide');
-                    tabel.ajax.reload();
-                },
-                error: function(xhr) {
-                    console.log(xhr.responseJSON.message);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to save the changes?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('datakategori.update') }}",
+                        type: "POST",
+                        data: data,
+                        success: function(response) {
+                            console.log(response);
+                            $('#modalEdit').modal('hide');
+                            tabel.ajax.reload();
 
+                            Swal.fire(
+                                'Saved!',
+                                'Your data has been updated.',
+                                'success'
+                            );
+                        },
+                        error: function(xhr) {
+                            console.log(xhr.responseJSON.message);
+
+                            Swal.fire(
+                                'Error!',
+                                'Error updating data: ' + xhr.responseJSON.message,
+                                'error'
+                            );
+                        }
+                    });
                 }
             });
         });
-
-
 
         function modalEdit(id, name, description) {
             $('#id').val(id);
@@ -292,6 +378,13 @@
         #tabelKategori thead th:first-child::before {
             display: none !important;
             pointer-events: none;
+        }
+
+        @media only screen and (max-width: 768px) {
+            #tabelKategori td {
+                white-space: normal;
+                word-wrap: break-word;
+            }
         }
     </style>
 @endpush

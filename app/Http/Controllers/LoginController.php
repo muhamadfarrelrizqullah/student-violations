@@ -31,16 +31,16 @@ class LoginController extends Controller
     if (Auth::attempt($infologin)) {
         if (Auth::user()->status == 'Aktif') {
             if (Auth::user()->role == 'Admin') {
-                return redirect('/admin/dashboard');
+                return redirect('/admin/dashboard')->with('success', 'Login successful!');
             } else if (Auth::user()->role == 'Guru') {
-                return redirect('/guru/dashboard');
+                return redirect('/guru/dashboard')->with('success', 'Login successful!');
             }
         } else {
             Auth::logout();
-            return redirect('/login');
+            return redirect('/login')->with('error', 'Account is inactive.');
         }
     } else {
-        return redirect('/login');
+        return redirect('/login')->with('error', 'Invalid email or password.');
     } 
                 
     }
