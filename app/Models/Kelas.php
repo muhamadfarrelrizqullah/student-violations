@@ -11,7 +11,8 @@ class Kelas extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'major'
     ];
 
     public function siswa()

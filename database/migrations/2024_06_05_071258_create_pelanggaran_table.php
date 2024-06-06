@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->foreign('siswa_id')->references('id')->on('siswa');
             $table->foreign('kategori_id')->references('id')->on('kategoris');
-            $table->foreign('sanksi_id')->references('id')->on('sanksi');
+            $table->foreign('sanksi_id')->references('id')->on('sanksis');
             $table->foreign('guru_id')->references('id')->on('pengguna'); 
         });
     }

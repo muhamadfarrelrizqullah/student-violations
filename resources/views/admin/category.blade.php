@@ -74,7 +74,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
@@ -105,8 +105,8 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" id="id" name="id">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save</button>
                 </div>
                 </form>
             </div>
@@ -133,12 +133,12 @@
                         <div class="mb-3">
                             <label for="description" class="form-label">Description:</label>
                             <input type="textarea" class="form-control" id="addDescription" name="description"
-                                value="{{ old('decription') }}" placeholder="Enter the category description">
+                                value="{{ old('description') }}" placeholder="Enter the category description">
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" id="btnSimpan" class="btn btn-success">Simpan</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" id="btnSave" class="btn btn-success">Save</button>
                 </div>
                 </form>
             </div>
@@ -213,7 +213,7 @@
             $('#tabelKategori').DataTable().columns.adjust().responsive.recalc();
         });
 
-        function modalDetail(name, description, status) {
+        function modalDetail(name, description) {
             $('#detailName').val(name);
             $('#detailDescription').val(description);
             $('#modalDetail').modal('show');
