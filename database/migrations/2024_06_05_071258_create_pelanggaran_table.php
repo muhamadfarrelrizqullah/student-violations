@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('siswa_id')->references('id')->on('siswa');
+            $table->foreign('siswa_id')->references('id')->on('siswas');
             $table->foreign('kategori_id')->references('id')->on('kategoris');
             $table->foreign('sanksi_id')->references('id')->on('sanksis');
             $table->foreign('guru_id')->references('id')->on('pengguna'); 

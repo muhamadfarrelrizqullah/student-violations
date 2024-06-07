@@ -33,7 +33,7 @@ class KelasController extends Controller
     {
     $request->validate([
         'name' => 'required|string|max:100',
-        'major' => 'nullable|string|max:100',
+        'major' => 'required|string|max:100',
     ]);
 
     $class = new Kelas;
@@ -50,7 +50,7 @@ class KelasController extends Controller
 
             $request->validate([
                 'name' => 'required|string|max:100',
-                'major' => 'nullable|string|max:100',
+                'major' => 'required|string|max:100',
             ]);
 
             $class = Kelas::findOrFail($request->id);

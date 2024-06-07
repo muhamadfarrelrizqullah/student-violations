@@ -243,7 +243,7 @@
                             if (data === 'Admin') {
                                 return `<span class="badge bg-primary">${data}</span>`;
                             } else if (data === 'Guru') {
-                                return `<span class="badge bg-info">${data}</span>`;
+                                return `<span class="badge bg-secondary">${data}</span>`;
                             } else {
                                 return data;
                             }

@@ -8,6 +8,7 @@ use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\SanksiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\ProfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::get('/admin/sanction', [SanksiController::class, 'index'])->name('admin-s
 Route::get('/admin/student', [SiswaController::class, 'index'])->name('admin-student');
 Route::get('/admin/class', [KelasController::class, 'index'])->name('admin-class');
 Route::get('/admin/user', [PenggunaController::class, 'index'])->name('admin-user');
+Route::get('/admin/profile', [ProfilController::class, 'index'])->name('admin-profile');
 
 Route::get('/category', [KategoriController::class, 'read'])->name('datakategori');
 Route::put('/category/update', [KategoriController::class, 'update'])->name('datakategori.update');
@@ -59,6 +61,10 @@ Route::put('/user/update', [PenggunaController::class, 'update'])->name('datapen
 Route::delete('/user/{id}', [PenggunaController::class, 'destroy'])->name('datapengguna.destroy');
 Route::post('/user/store', [PenggunaController::class, 'store'])->name('datapengguna.store');
 
+Route::get('/student', [SiswaController::class, 'read'])->name('datasiswa');
+Route::put('/student/update', [SiswaController::class, 'update'])->name('datasiswa.update');
+Route::delete('/student/{id}', [SiswaController::class, 'destroy'])->name('datasiswa.destroy');
+Route::post('/student/store', [SiswaController::class, 'store'])->name('datasiswa.store');
 
 //Guru
 Route::get('/guru/dashboard', [LoginController::class, 'guru']);

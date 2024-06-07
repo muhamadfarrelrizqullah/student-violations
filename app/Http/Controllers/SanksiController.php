@@ -33,7 +33,7 @@ class SanksiController extends Controller
     {
     $request->validate([
         'name' => 'required|string|max:100',
-        'points' => 'nullable|string|max:100',
+        'points' => 'required|string|max:100',
     ]);
 
     $sanction = new Sanksi;
@@ -50,7 +50,7 @@ class SanksiController extends Controller
 
             $request->validate([
                 'name' => 'required|string|max:100',
-                'points' => 'nullable|string|max:100',
+                'points' => 'required|string|max:100',
             ]);
 
             $sanction = Sanksi::findOrFail($request->id);

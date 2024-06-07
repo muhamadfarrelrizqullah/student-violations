@@ -60,7 +60,7 @@ class KategoriController extends Controller
             $category->save();
 
 
-            return response()->json(['success' => 'Category berhasil diupdate']);
+            return response()->json(['success' => 'Category updated successfully']);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage() ], 500);
         }

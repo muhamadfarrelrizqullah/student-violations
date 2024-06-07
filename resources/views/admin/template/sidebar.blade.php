@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="#">
+                        <a class="menu-link {{ Request::routeIs('admin-profile') ? 'active' : '' }}" href="{{ route('admin-profile') }}">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-setting fs-2">
                                     <span class="path1"></span>

@@ -21,8 +21,8 @@ class PenggunaController extends Controller
     ->get();
 
     return datatables()->of($data)
-        ->addIndexColumn()
-        ->make(true);
+    ->addIndexColumn()
+    ->make(true);
     }
 
     public function destroy($id)
@@ -41,7 +41,7 @@ class PenggunaController extends Controller
         'name' => 'required|string|max:100',
         'noTelp' => 'required|string|max:100',
         'email' => 'required|email|unique:pengguna,email',
-        'password' => 'required',
+        'password' => 'required|min:5',
         'role' => 'required|in:Admin,Guru,Teknisi',
         'status' => 'required|in:Aktif,Tidak Aktif',
     ]);
@@ -69,7 +69,7 @@ class PenggunaController extends Controller
             'name' => 'required|string|max:100',
             'noTelp' => 'required|string|max:100', // Ensure this is validated
             'email' => 'required|email|unique:pengguna,email,'. $request->id,
-            'password' => 'required',
+            'password' => 'required|min:5',
             'role' => 'required|in:Admin,Guru,Teknisi',
             'status' => 'required|in:Aktif,Tidak Aktif',
         ]);

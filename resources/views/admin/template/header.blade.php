@@ -119,11 +119,17 @@
                         </div>
                         <div class="separator my-2"></div>
                         <div class="menu-item px-5 my-1">
-                            <a href="account/settings.html" class="menu-link px-5">Account Settings</a>
+                            <a href="{{ route('admin-profile') }}" class="menu-link px-5">Account Settings</a>
                         </div>
                         <div class="menu-item px-5">
-                            <a href="authentication/layouts/corporate/sign-in.html" class="menu-link px-5">Sign
-                                Out</a>
+                            <form action="/logout" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
+                                    data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click">
+                                    <span class="btn-label">Logout</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
