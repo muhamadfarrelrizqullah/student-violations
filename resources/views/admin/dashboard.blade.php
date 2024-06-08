@@ -8,7 +8,7 @@
             <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                     <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                        eCommerce Dashboard</h1>
+                        Admin Dashboard</h1>
                         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                             <li class="breadcrumb-item text-muted">Home</li>
                         </ul>
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div id="kt_app_content" class="app-content flex-column-fluid">
+        <div id="kt_app_content" class="app-content flex-column-fluid" style="overflow-x: hidden;">
             <div id="kt_app_content_container" class="app-container container-xxl">
                 <div class="row g-5 g-xl-10 mb-xl-10">
                     <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">

@@ -8,10 +8,16 @@ use App\Models\Kategori;
 use App\Models\Sanksi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pelanggaran extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'pelanggarans';
+    protected $rememberTokenName = '';
+    protected $dates = ['deleted_at'];
+    public $timestamps = false;
 
     protected $fillable = [
         'student_id', 'category_id', 'sanction_id', 'teacher_id', 'date', 'description'

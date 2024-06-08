@@ -66,5 +66,10 @@ Route::put('/student/update', [SiswaController::class, 'update'])->name('datasis
 Route::delete('/student/{id}', [SiswaController::class, 'destroy'])->name('datasiswa.destroy');
 Route::post('/student/store', [SiswaController::class, 'store'])->name('datasiswa.store');
 
+Route::get('/violation', [PelanggaranController::class, 'read'])->name('datapelanggaran');
+Route::put('/violation/update', [PelanggaranController::class, 'update'])->name('datapelanggaran.update');
+Route::delete('/violation/{id}', [PelanggaranController::class, 'destroy'])->name('datapelanggaran.destroy');
+Route::post('/violation/store', [PelanggaranController::class, 'store'])->name('datapelanggaran.store');
+
 //Guru
 Route::get('/guru/dashboard', [LoginController::class, 'guru']);
