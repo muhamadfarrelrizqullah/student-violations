@@ -368,6 +368,7 @@
         #tabelKelas th {
             text-align: center;
             font-size: 15px;
+            white-space: nowrap;
         }
 
         #tabelKelas th {

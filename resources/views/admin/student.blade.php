@@ -113,8 +113,8 @@
                                 placeholder="Enter the student nis">
                         </div>
                         <div class="mb-3">
-                            <label for="updateClass" class="form-label">Class:</label>
-                            <select class="form-control" id="updateIdClass" name="class_id">
+                            <label for="updateClassId" class="form-label">Class:</label>
+                            <select class="form-control" id="updateClassId" name="class_id">
                                 @foreach ($classes as $class)
                                     <option value="{{ $class->id }}">{{ $class->name }} - {{ $class->major }}</option>
                                 @endforeach
@@ -392,11 +392,11 @@
             });
         });
 
-        function modalEdit(id, name, nis, id_class) {
+        function modalEdit(id, name, nis, class_id) {
             $('#id').val(id);
             $('#updateName').val(name);
             $('#updateNis').val(nis);
-            $('#updateIdClass').val(id_class);
+            $('#updateClassId').val(class_id);
             $('#modalEdit').modal('show');
         }
     </script>
@@ -408,6 +408,7 @@
         #tabelSiswa th {
             text-align: center;
             font-size: 15px;
+            white-space: nowrap;
         }
 
         #tabelSiswa th {

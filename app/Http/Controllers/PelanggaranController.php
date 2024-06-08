@@ -16,7 +16,12 @@ class PelanggaranController extends Controller
 {
     public function index()
     {
-        return view('admin.violation');
+        $students = Siswa::all();
+        $categories = Kategori::all();
+        $sanctions = Sanksi::all();
+        $users = Pengguna::where('role', 'guru')->get();
+        $profiles = Profil::with('pengguna')->get();
+        return view('admin.violation', compact('students', 'categories', 'sanctions', 'users', 'profiles'));
     }
 
     public function read()
@@ -51,6 +56,46 @@ class PelanggaranController extends Controller
     return datatables()->of($data)
         ->addIndexColumn()
         ->make(true);
+    }
+
+    public function destroy($id)
+    {
+    $pelanggaran = Pelanggaran::find($id);
+    if (!$pelanggaran) {
+        return response()->json(['message' => 'Violation not found.'], 404);
+    }
+    $pelanggaran->delete();
+    return response()->json(['message' => 'Violation deleted successfully.']);
+    }
+
+    public function update(Request $request)
+    {
+        try {
+
+            $request->validate([
+                'student_id' => 'required|exists:siswas,id',
+                'category_id' => 'required|exists:kategoris,id',
+                'sanction_id' => 'required|exists:sanksis,id',
+                'date' => 'required',
+                'description' => 'required|string|max:255',
+                'user_id' => 'required|exists:pengguna,id',
+            ]);
+
+            $violation = Pelanggaran::findOrFail($request->id);
+
+            $violation->siswa_id = $request->student_id;
+            $violation->kategori_id = $request->category_id;
+            $violation->sanksi_id = $request->sanction_id;
+            $violation->date = $request->date;
+            $violation->description = $request->description;
+            $violation->guru_id = $request->user_id;
+            $violation->save();
+
+
+            return response()->json(['success' => 'Violation updated successfully']);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th->getMessage() ], 500);
+        }
     }
 
 }

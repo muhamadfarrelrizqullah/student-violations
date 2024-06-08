@@ -33,14 +33,15 @@
                                                 <th>No</th>
                                                 <th>Student Name</th>
                                                 <th>NIS</th>
+                                                <th>Class</th>
                                                 <th>Category</th>
                                                 <th>Date</th>
                                                 <th>Sanction</th>
-                                                <th>Action</th>
                                                 <th>Teacher Name</th>
                                                 <th>Teacher Phone</th>
                                                 <th>Teacher Email</th>
                                                 <th>Description</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -66,8 +67,8 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="detailName" class="form-label">Name:</label>
-                            <input type="text" class="form-control" id="detailName" readonly>
+                            <label for="detailStudentName" class="form-label">Student Name:</label>
+                            <input type="text" class="form-control" id="detailStudentName" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="detailNis" class="form-label">NIS:</label></label>
@@ -78,8 +79,32 @@
                             <input type="text" class="form-control" id="detailClassName" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="detailMajor" class="form-label">Major:</label></label>
-                            <input type="text" class="form-control" id="detailMajor" readonly>
+                            <label for="detailCategoryName" class="form-label">Category:</label></label>
+                            <input type="text" class="form-control" id="detailCategoryName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="detailDate" class="form-label">Date:</label></label>
+                            <input type="text" class="form-control" id="detailDate" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="detailDescription" class="form-label">Description:</label></label>
+                            <input type="textarea" class="form-control" id="detailDescription" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="detailSanctionName" class="form-label">Sanction:</label></label>
+                            <input type="text" class="form-control" id="detailSanctionName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="detailTeacherName" class="form-label">Teacher Name:</label></label>
+                            <input type="text" class="form-control" id="detailTeacherName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="detailPhoneNumber" class="form-label">Teacher Phone Number:</label></label>
+                            <input type="number" class="form-control" id="detailPhoneNumber" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="detailTeacherEmail" class="form-label">Teacher Email:</label></label>
+                            <input type="email" class="form-control" id="detailTeacherEmail" readonly>
                         </div>
                     </form>
                 </div>
@@ -103,21 +128,45 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name:</label>
-                            <input type="text" class="form-control" id="updateName" name="name"
-                                placeholder="Enter the violation name">
+                            <label for="updateStudentId" class="form-label">Student Name:</label>
+                            <select class="form-control" id="updateStudentId" name="student_id">
+                                @foreach ($students as $student)
+                                    <option value="{{ $student->id }}">{{ $student->name }} - {{ $student->nis }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="nis" class="form-label">NIS:</label>
-                            <input type="number" class="form-control" id="updateNis" name="nis"
-                                placeholder="Enter the violation nis">
+                            <label for="updateCategoryId" class="form-label">Category:</label>
+                            <select class="form-control" id="updateCategoryId" name="category_id">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="updateClass" class="form-label">Class:</label>
-                            <select class="form-control" id="updateIdClass" name="class_id">
-                                {{-- @foreach ($classes as $class)
-                                    <option value="{{ $class->id }}">{{ $class->name }} - {{ $class->major }}</option>
-                                @endforeach --}}
+                            <label for="updateSanctionId" class="form-label">Sanction:</label>
+                            <select class="form-control" id="updateSanctionId" name="sanction_id">
+                                @foreach ($sanctions as $sanction)
+                                    <option value="{{ $sanction->id }}">{{ $sanction->name }} - {{ $sanction->points }}
+                                        Points</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date:</label>
+                            <input type="date" class="form-control" id="updateDate" name="date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <input type="text" class="form-control" id="updateDescription" name="description"
+                                placeholder="Enter the violation description">
+                        </div>
+                        <div class="mb-3">
+                            <label for="updateUserId" class="form-label">Teacher Name:</label>
+                            <select class="form-control" id="updateUserId" name="user_id">
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->profil->nama_lengkap }}</option>
+                                @endforeach
                             </select>
                         </div>
                 </div>
@@ -148,6 +197,10 @@
                         name: 'student_name'
                     },
                     {
+                        data: 'nis',
+                        name: 'nis'
+                    },
+                    {
                         data: 'class_name',
                         name: 'class_name'
                     },
@@ -162,22 +215,6 @@
                     {
                         data: 'sanction_name',
                         name: 'sanction_name'
-                    },
-                    {
-                        data: null,
-                        name: 'aksi',
-                        orderable: false,
-                        searchable: false,
-                        render: function(data, type, row, meta) {
-                            return `<button type="button" onclick="modalDetail('${row.name}','${row.nis}','${row.class_name}','${row.major}')"class="btn btn-primary btn-sm btn-icon-text"><i 
-                                                    class="link-icon" data-feather="eye" data-bs-toggle="modal"
-                                                    data-bs-target="#modalDetail"></i> </button>
-                                    <button type="button" onclick="modalEdit('${row.id}','${row.name}','${row.nis}','${row.class_id}')" class="btn btn-success btn-sm btn-icon-text"><i
-                                                    class="link-icon" data-feather="edit" data-bs-toggle="modal"
-                                                    data-bs-target="#modalEdit" onclick="#"></i> </button>
-                                    <button type="button" onclick="deleteData(${row.id})" class="btn btn-danger btn-sm btn-icon-text"><i
-                                                    class="link-icon" data-feather="trash"></i></button>`;
-                        }
                     },
                     {
                         data: 'teacher_name',
@@ -195,6 +232,23 @@
                         data: 'description',
                         name: 'description'
                     },
+                    {
+                        data: null,
+                        name: 'aksi',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row, meta) {
+                            return `<button type="button" onclick="modalDetail('${row.student_name}','${row.nis}','${row.class_name}','${row.category_name}','${row.date}','${row.description}','${row.sanction_name}','${row.teacher_name}','${row.phone_number}','${row.teacher_email}')"
+                                                    class="btn btn-primary btn-sm btn-icon-text"><i 
+                                                    class="link-icon" data-feather="eye" data-bs-toggle="modal"
+                                                    data-bs-target="#modalDetail"></i> </button>
+                                    <button type="button" onclick="modalEdit('${row.id}','${row.student_id}','${row.category_id}','${row.date}','${row.description}','${row.sanction_id}','${row.user_id}')" class="btn btn-success btn-sm btn-icon-text"><i
+                                                    class="link-icon" data-feather="edit" data-bs-toggle="modal"
+                                                    data-bs-target="#modalEdit" onclick="#"></i> </button>
+                                    <button type="button" onclick="deleteData(${row.id})" class="btn btn-danger btn-sm btn-icon-text"><i
+                                                    class="link-icon" data-feather="trash"></i></button>`;
+                        }
+                    }
                 ],
                 aLengthMenu: [
                     [10, 30, 50, -1],
@@ -227,21 +281,35 @@
             $('#tabelPelanggaran').DataTable().columns.adjust().responsive.recalc();
         });
 
-        function modalDetail(name, nis, class_name, major) {
-            $('#detailName').val(name);
+        function modalDetail(student_name, nis, class_name, category_name, date, description, sanction_name, teacher_name,
+            phone_number, teacher_email) {
+            $('#detailStudentName').val(student_name);
             $('#detailNis').val(nis);
             $('#detailClassName').val(class_name);
-            $('#detailMajor').val(major);
+            $('#detailCategoryName').val(category_name);
+            $('#detailDate').val(date);
+            $('#detailDescription').val(description);
+            $('#detailSanctionName').val(sanction_name);
+            $('#detailTeacherName').val(teacher_name);
+            $('#detailPhoneNumber').val(phone_number);
+            $('#detailTeacherEmail').val(teacher_email);
             $('#modalDetail').modal('show');
         }
 
         $(document).on('click', '.detail-btn', function() {
-            var name = $(this).data('name');
+            var student_name = $(this).data('student_name');
             var nis = $(this).data('nis');
             var class_name = $(this).data('class_name');
-            var major = $(this).data('major');
+            var category_name = $(this).data('category_name');
+            var date = $(this).data('date');
+            var description = $(this).data('description');
+            var sanction_name = $(this).data('sanction_name');
+            var teacher_name = $(this).data('teacher_name');
+            var phone_number = $(this).data('phone_number');
+            var teacher_email = $(this).data('teacher_email');
 
-            modalDetail(name, nis, class_name, major);
+            modalDetail(student_name, nis, class_name, category_name, date, description, sanction_name,
+                teacher_name, phone_number, teacher_email);
         });
 
         $('#modalEdit, #modalDetail').on('hidden.bs.modal', function() {
@@ -338,11 +406,14 @@
             });
         });
 
-        function modalEdit(id, name, nis, id_class) {
+        function modalEdit(id, student_id, category_id, date, description, sanction_id, user_id) {
             $('#id').val(id);
-            $('#updateName').val(name);
-            $('#updateNis').val(nis);
-            $('#updateIdClass').val(id_class);
+            $('#updateStudentId').val(student_id);
+            $('#updateCategoryId').val(category_id);
+            $('#updateDate').val(date);
+            $('#updateDescription').val(description);
+            $('#updateSanctionId').val(sanction_id);
+            $('#updateUserId').val(user_id);
             $('#modalEdit').modal('show');
         }
     </script>
@@ -353,7 +424,7 @@
         #tabelPelanggaran td,
         #tabelPelanggaran th {
             text-align: center;
-            font-size: 15px;
+            font-size: 13px;
             white-space: nowrap;
         }
 

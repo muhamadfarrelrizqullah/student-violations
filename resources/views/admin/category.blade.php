@@ -368,6 +368,7 @@
         #tabelKategori th {
             text-align: center;
             font-size: 15px;
+            white-space: nowrap;
         }
 
         #tabelKategori th {
