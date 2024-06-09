@@ -14,14 +14,29 @@ class ProfilSeeder extends Seeder
     public function run()
     {
         Profil::create([
-            'id_pengguna' => 1,
-            'nama_lengkap' => 'Muhamad Farrel',
-            'no_telepon' => '089123567901',
+            'user_id' => 1,
+            'name' => 'Muhamad Farrel',
+            'phone' => '089123567901',
         ]);
         Profil::create([
-            'id_pengguna' => 2,
-            'nama_lengkap' => 'Farrel Rizqullah',
-            'no_telepon' => '085123456890',
+            'user_id' => 2,
+            'name' => 'Kimberly',
+            'phone' => '089123567901',
+        ]);
+        Profil::create([
+            'user_id' => 3,
+            'name' => 'Heru Khan',
+            'phone' => '085123456890',
+        ]);
+        Profil::create([
+            'user_id' => 4,
+            'name' => 'Victoria',
+            'phone' => '085123456890',
+        ]);
+        Profil::create([
+            'user_id' => 5,
+            'name' => 'Adeline',
+            'phone' => '085123456890',
         ]);
     }
 }

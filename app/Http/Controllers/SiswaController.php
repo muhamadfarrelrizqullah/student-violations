@@ -17,7 +17,7 @@ class SiswaController extends Controller
 
     public function read()
     {
-    $data = Siswa::leftJoin('kelas', 'kelas.id', '=', 'siswas.kelas_id')
+    $data = Siswa::leftJoin('kelas', 'kelas.id', '=', 'siswas.class_id')
     ->select(['siswas.id', 'siswas.name', 'siswas.nis','kelas.id as class_id', 'kelas.name as class_name', 'kelas.major'])
     ->get();
         
@@ -47,7 +47,7 @@ class SiswaController extends Controller
     $student = new Siswa;
     $student->name = $request->name;
     $student->nis = $request->nis;
-    $student->kelas_id = $request->class_id;
+    $student->class_id = $request->class_id;
     $student->save();
 
     return redirect()->back()->with('success', 'Student added successfully');
@@ -67,7 +67,7 @@ class SiswaController extends Controller
 
             $student->name = $request->name;
             $student->nis = $request->nis;
-            $student->kelas_id = $request->class_id;
+            $student->class_id = $request->class_id;
             $student->save();
 
 

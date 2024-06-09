@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Sanksi;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SanksiSeeder extends Seeder
 {

@@ -32,15 +32,11 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Student Name</th>
-                                                <th>NIS</th>
                                                 <th>Class</th>
                                                 <th>Category</th>
-                                                <th>Date</th>
                                                 <th>Sanction</th>
                                                 <th>Teacher Name</th>
-                                                <th>Teacher Phone</th>
-                                                <th>Teacher Email</th>
-                                                <th>Description</th>
+                                                <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -153,6 +149,14 @@
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label for="updateUserId" class="form-label">Teacher Name:</label>
+                            <select class="form-control" id="updateUserId" name="user_id">
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->profil->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="date" class="form-label">Date:</label>
                             <input type="date" class="form-control" id="updateDate" name="date">
                         </div>
@@ -160,14 +164,6 @@
                             <label for="description" class="form-label">Description:</label>
                             <input type="text" class="form-control" id="updateDescription" name="description"
                                 placeholder="Enter the violation description">
-                        </div>
-                        <div class="mb-3">
-                            <label for="updateUserId" class="form-label">Teacher Name:</label>
-                            <select class="form-control" id="updateUserId" name="user_id">
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->profil->nama_lengkap }}</option>
-                                @endforeach
-                            </select>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -197,20 +193,12 @@
                         name: 'student_name'
                     },
                     {
-                        data: 'nis',
-                        name: 'nis'
-                    },
-                    {
                         data: 'class_name',
                         name: 'class_name'
                     },
                     {
                         data: 'category_name',
                         name: 'category_name'
-                    },
-                    {
-                        data: 'date',
-                        name: 'date'
                     },
                     {
                         data: 'sanction_name',
@@ -221,16 +209,8 @@
                         name: 'teacher_name'
                     },
                     {
-                        data: 'phone_number',
-                        name: 'phone_number'
-                    },
-                    {
-                        data: 'teacher_email',
-                        name: 'teacher_email'
-                    },
-                    {
-                        data: 'description',
-                        name: 'description'
+                        data: 'date',
+                        name: 'date'
                     },
                     {
                         data: null,

@@ -15,25 +15,21 @@ class Pengguna extends Authenticatable
 {
     use HasFactory,Notifiable,CanResetPassword,SoftDeletes;
 
-    protected $table = 'pengguna';
     protected $rememberTokenName = '';
     protected $dates = ['deleted_at'];
     public $timestamps = false;
 
     protected $fillable = [
-        'email',
-        'password',
-        'role',
-        'status',
+        'email', 'password', 'role', 'status'
     ];
 
     public function pelanggaran()
     {
-        return $this->hasMany(Pelanggaran::class, 'id_pengguna', 'id');
+        return $this->hasMany(Pelanggaran::class, 'user_id', 'id');
     }
 
     public function profil()
     {
-        return $this->hasOne(Profil::class,  'id_pengguna', 'id');
+        return $this->hasOne(Profil::class,  'user_id', 'id');
     }
 }

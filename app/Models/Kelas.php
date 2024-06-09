@@ -11,18 +11,16 @@ class Kelas extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'kelas';
     protected $rememberTokenName = '';
     protected $dates = ['deleted_at'];
     public $timestamps = false;
 
     protected $fillable = [
-        'name',
-        'major'
+        'name', 'major'
     ];
 
     public function siswa()
     {
-        return $this->hasMany(Siswa::class, 'id_siswa', 'id');
+        return $this->hasMany(Siswa::class, 'student_id', 'id');
     }
 }

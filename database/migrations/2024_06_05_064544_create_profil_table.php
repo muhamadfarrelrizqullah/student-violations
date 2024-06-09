@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profil', function (Blueprint $table) {
+        Schema::create('profils', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pengguna');
-            $table->string('nama_lengkap', 100);
-            $table->string('no_telepon', 30);
+            $table->unsignedBigInteger('user_id');
+            $table->string('name', 100);
+            $table->string('phone', 30);
 
-            $table->foreign('id_pengguna')->references('id')->on('pengguna');
+            $table->foreign('user_id')->references('id')->on('penggunas');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profil');
+        Schema::dropIfExists('profils');
     }
 };

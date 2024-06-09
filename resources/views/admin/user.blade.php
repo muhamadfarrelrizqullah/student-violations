@@ -225,12 +225,12 @@
                         name: 'DT_RowIndex',
                     },
                     {
-                        data: 'nama_lengkap',
-                        name: 'nama_lengkap'
+                        data: 'name',
+                        name: 'name'
                     },
                     {
-                        data: 'no_telepon',
-                        name: 'no_telepon'
+                        data: 'phone',
+                        name: 'phone'
                     },
                     {
                         data: 'email',
@@ -268,10 +268,10 @@
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row, meta) {
-                            return `<button type="button" onclick="modalDetail('${row.email}','${row.role}','${row.status}','${row.nama_lengkap}','${row.no_telepon}')"class="btn btn-primary btn-sm btn-icon-text"><i 
+                            return `<button type="button" onclick="modalDetail('${row.email}','${row.role}','${row.status}','${row.name}','${row.phone}')"class="btn btn-primary btn-sm btn-icon-text"><i 
                                                     class="link-icon" data-feather="eye" data-bs-toggle="modal"
                                                     data-bs-target="#modalDetail"></i> </button>
-                                    <button type="button" onclick="modalEdit('${row.id}','${row.email}','${row.role}','${row.status}','${row.nama_lengkap}','${row.no_telepon}')" class="btn btn-success btn-sm btn-icon-text"><i
+                                    <button type="button" onclick="modalEdit('${row.id}','${row.email}','${row.role}','${row.status}','${row.name}','${row.phone}')" class="btn btn-success btn-sm btn-icon-text"><i
                                                     class="link-icon" data-feather="edit" data-bs-toggle="modal"
                                                     data-bs-target="#modalEdit" onclick="#"></i> </button>
                                     <button type="button" onclick="deleteData(${row.id})" class="btn btn-danger btn-sm btn-icon-text"><i
@@ -310,12 +310,12 @@
             $('#tabelPengguna').DataTable().columns.adjust().responsive.recalc();
         });
 
-        function modalDetail(email, role, status, nama_lengkap, no_telepon) {
+        function modalDetail(email, role, status, name, phone) {
             $('#detailEmail').val(email);
             $('#detailRole').val(role);
             $('#detailStatus').val(status);
-            $('#detailName').val(nama_lengkap);
-            $('#detailPhoneNumber').val(no_telepon);
+            $('#detailName').val(name);
+            $('#detailPhoneNumber').val(phone);
             $('#modalDetail').modal('show');
         }
 
@@ -323,10 +323,10 @@
             var email = $(this).data('email');
             var role = $(this).data('role');
             var status = $(this).data('status');
-            var nama_lengkap = $(this).data('nama_lengkap');
-            var no_telepon = $(this).data('no_telepon');
+            var name = $(this).data('name');
+            var phone = $(this).data('phone');
 
-            modalDetail(email, role, status, nama_lengkap, no_telepon);
+            modalDetail(email, role, status, name, phone);
         });
 
         $('#modalTambah, #modalEdit, #modalDetail').on('hidden.bs.modal', function() {
@@ -456,13 +456,13 @@
             });
         });
 
-        function modalEdit(id, email, role, status, nama_lengkap, no_telepon) {
+        function modalEdit(id, email, role, status, name, phone) {
             $('#id').val(id);
             $('#updateEmail').val(email);
             $('#updateRole').val(role);
             $('#updateStatus').val(status);
-            $('#updateName').val(nama_lengkap);
-            $('#updatePhoneNumber').val(no_telepon);
+            $('#updateName').val(name);
+            $('#updatePhoneNumber').val(phone);
             $('#modalEdit').modal('show');
         }
     </script>

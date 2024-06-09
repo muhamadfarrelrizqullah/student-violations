@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('nis')->unique();
-            $table->unsignedBigInteger('kelas_id');
+            $table->unsignedBigInteger('class_id');
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('kelas_id')->references('id')->on('kelas');
+            $table->foreign('class_id')->references('id')->on('kelas');
         });
     }
 

@@ -26,12 +26,12 @@ class PelanggaranController extends Controller
 
     public function read()
     {
-    $data = Pelanggaran::join('siswas', 'pelanggarans.siswa_id', '=', 'siswas.id')
-        ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
-        ->join('kategoris', 'pelanggarans.kategori_id', '=', 'kategoris.id')
-        ->join('sanksis', 'pelanggarans.sanksi_id', '=', 'sanksis.id')
-        ->join('pengguna', 'pelanggarans.guru_id', '=', 'pengguna.id')
-        ->join('profil', 'pengguna.id', '=', 'profil.id_pengguna')
+    $data = Pelanggaran::join('siswas', 'pelanggarans.student_id', '=', 'siswas.id')
+        ->join('kelas', 'siswas.class_id', '=', 'kelas.id')
+        ->join('kategoris', 'pelanggarans.category_id', '=', 'kategoris.id')
+        ->join('sanksis', 'pelanggarans.sanction_id', '=', 'sanksis.id')
+        ->join('penggunas', 'pelanggarans.teacher_id', '=', 'penggunas.id')
+        ->join('profils', 'penggunas.id', '=', 'profils.user_id')
         ->select([
             'pelanggarans.id',
             'siswas.id as student_id',
@@ -45,11 +45,11 @@ class PelanggaranController extends Controller
             'pelanggarans.description',
             'sanksis.id as sanction_id',
             'sanksis.name as sanction_name',
-            'profil.id as profile_id',
-            'profil.nama_lengkap as teacher_name',
-            'profil.no_telepon as phone_number',
-            'pengguna.id as user_id',
-            'pengguna.email as teacher_email',
+            'profils.id as profile_id',
+            'profils.name as teacher_name',
+            'profils.phone as phone_number',
+            'penggunas.id as user_id',
+            'penggunas.email as teacher_email',
         ])
         ->get();
 
@@ -78,17 +78,17 @@ class PelanggaranController extends Controller
                 'sanction_id' => 'required|exists:sanksis,id',
                 'date' => 'required',
                 'description' => 'required|string|max:255',
-                'user_id' => 'required|exists:pengguna,id',
+                'user_id' => 'required|exists:penggunas,id',
             ]);
 
             $violation = Pelanggaran::findOrFail($request->id);
 
-            $violation->siswa_id = $request->student_id;
-            $violation->kategori_id = $request->category_id;
-            $violation->sanksi_id = $request->sanction_id;
+            $violation->student_id = $request->student_id;
+            $violation->category_id = $request->category_id;
+            $violation->sanction_id = $request->sanction_id;
             $violation->date = $request->date;
             $violation->description = $request->description;
-            $violation->guru_id = $request->user_id;
+            $violation->teacher_id = $request->user_id;
             $violation->save();
 
 

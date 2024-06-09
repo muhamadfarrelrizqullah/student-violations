@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Pengguna;
 use App\Models\Profil;
 use Yajra\DataTables\Facades\DataTables;
@@ -16,8 +17,8 @@ class PenggunaController extends Controller
 
     public function read()
     {
-    $data = Pengguna::leftJoin('profil', 'pengguna.id', '=', 'profil.id_pengguna')
-    ->select(['pengguna.id', 'pengguna.email', 'pengguna.role', 'pengguna.status', 'profil.nama_lengkap', 'profil.no_telepon'])
+    $data = Pengguna::leftJoin('profils', 'penggunas.id', '=', 'profils.user_id')
+    ->select(['penggunas.id', 'penggunas.email', 'penggunas.role', 'penggunas.status', 'profils.name', 'profils.phone'])
     ->get();
 
     return datatables()->of($data)
@@ -40,7 +41,7 @@ class PenggunaController extends Controller
     $request->validate([
         'name' => 'required|string|max:100',
         'noTelp' => 'required|string|max:100',
-        'email' => 'required|email|unique:pengguna,email',
+        'email' => 'required|email|unique:penggunas,email',
         'password' => 'required|min:5',
         'role' => 'required|in:Admin,Guru,Teknisi',
         'status' => 'required|in:Aktif,Tidak Aktif',
@@ -54,9 +55,9 @@ class PenggunaController extends Controller
     $user->save();
 
     $profil = new Profil;
-    $profil->id_pengguna = $user->id;
-    $profil->nama_lengkap = $request->name;
-    $profil->no_telepon = $request->noTelp;
+    $profil->user_id = $user->id;
+    $profil->name = $request->name;
+    $profil->phone = $request->noTelp;
     $profil->save();
 
     return redirect()->back()->with('success', 'User added successfully');
@@ -68,7 +69,7 @@ class PenggunaController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'noTelp' => 'required|string|max:100', // Ensure this is validated
-            'email' => 'required|email|unique:pengguna,email,'. $request->id,
+            'email' => 'required|email|unique:penggunas,email,'. $request->id,
             'password' => 'required|min:5',
             'role' => 'required|in:Admin,Guru,Teknisi',
             'status' => 'required|in:Aktif,Tidak Aktif',
@@ -76,16 +77,20 @@ class PenggunaController extends Controller
 
         $user = Pengguna::findOrFail($request->id);
 
+        if (Auth::id() === $user->id) {
+            return response()->json(['message' => 'You cannot edit your own data.'], 403);
+        }
+
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role = $request->role;
         $user->status = $request->status;
         $user->save();
 
-        $profil = Profil::where('id_pengguna', $request->id)->first();
+        $profil = Profil::where('user_id', $request->id)->first();
         if ($profil) {
-            $profil->nama_lengkap = $request->name;
-            $profil->no_telepon = $request->noTelp; 
+            $profil->name = $request->name;
+            $profil->phone = $request->noTelp; 
             $profil->save();
         }
 

@@ -9,17 +9,14 @@ class Profil extends Model
 {
     use HasFactory;
 
-    protected $table = 'profil';
     protected $fillable = [
-        'id_pengguna',
-        'nama_lengkap',
-        'no_telepon',
+        'user_id', 'name', 'phone'
     ];
 
     public $timestamps = false;
 
     public function pengguna()
     {
-        return $this->belongsTo(Pengguna::class, 'id_pengguna', 'id');
+        return $this->belongsTo(Pengguna::class, 'user_id', 'id');
     }
 }

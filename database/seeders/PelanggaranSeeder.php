@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Pelanggaran;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PelanggaranSeeder extends Seeder
 {
@@ -15,46 +15,46 @@ class PelanggaranSeeder extends Seeder
     public function run(): void
     {
         Pelanggaran::create([
-            'siswa_id' => 1, 
-            'kategori_id' => 1, 
-            'sanksi_id' => 1,
-            'guru_id' => 2,
+            'student_id' => 1, 
+            'category_id' => 1, 
+            'sanction_id' => 1,
+            'teacher_id' => 2,
             'date' => Carbon::now(), 
             'description' => 'Terlambat', 
         ]);
 
         Pelanggaran::create([
-            'siswa_id' => 2, 
-            'kategori_id' => 2, 
-            'sanksi_id' => 2,
-            'guru_id' => 2,
+            'student_id' => 2, 
+            'category_id' => 2, 
+            'sanction_id' => 2,
+            'teacher_id' => 2,
             'date' => Carbon::now(),
             'description' => 'Tidak memakai seragam', 
         ]);
 
         Pelanggaran::create([
-            'siswa_id' => 3, 
-            'kategori_id' => 3, 
-            'sanksi_id' => 3,
-            'guru_id' => 2,
+            'student_id' => 3, 
+            'category_id' => 3, 
+            'sanction_id' => 3,
+            'teacher_id' => 2,
             'date' => Carbon::now(), 
             'description' => 'Bolos', 
         ]);
 
         Pelanggaran::create([
-            'siswa_id' => 4, 
-            'kategori_id' => 4, 
-            'sanksi_id' => 4,
-            'guru_id' => 2,
+            'student_id' => 4, 
+            'category_id' => 4, 
+            'sanction_id' => 4,
+            'teacher_id' => 2,
             'date' => Carbon::now(), 
             'description' => 'Merokok', 
         ]);
 
         Pelanggaran::create([
-            'siswa_id' => 5, 
-            'kategori_id' => 5, 
-            'sanksi_id' => 5,
-            'guru_id' => 2,
+            'student_id' => 5, 
+            'category_id' => 5, 
+            'sanction_id' => 5,
+            'teacher_id' => 2,
             'date' => Carbon::now(),
             'description' => 'Berkelahi',
         ]);
