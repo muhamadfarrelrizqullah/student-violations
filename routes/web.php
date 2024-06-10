@@ -40,7 +40,6 @@ Route::get('/admin/student', [SiswaController::class, 'index'])->name('admin-stu
 Route::get('/admin/class', [KelasController::class, 'index'])->name('admin-class');
 Route::get('/admin/user', [PenggunaController::class, 'index'])->name('admin-user');
 Route::get('/admin/profile', [ProfilController::class, 'index'])->name('admin-profile');
-Route::get('/admin/profile-edit', [ProfilController::class, 'edit'])->name('admin-profile-edit');
 
 Route::get('/category', [KategoriController::class, 'read'])->name('datakategori');
 Route::put('/category/update', [KategoriController::class, 'update'])->name('datakategori.update');
@@ -71,6 +70,9 @@ Route::get('/violation', [PelanggaranController::class, 'read'])->name('datapela
 Route::put('/violation/update', [PelanggaranController::class, 'update'])->name('datapelanggaran.update');
 Route::delete('/violation/{id}', [PelanggaranController::class, 'destroy'])->name('datapelanggaran.destroy');
 Route::post('/violation/store', [PelanggaranController::class, 'store'])->name('datapelanggaran.store');
+
+Route::get('/admin/profile-edit', [ProfilController::class, 'edit'])->name('admin.profile-edit');
+Route::post('/admin/profile-edit-process', [ProfilController::class, 'update'])->name('admin.profile-edit-proses');
 
 //Guru
 Route::get('/guru/dashboard', [LoginController::class, 'guru']);

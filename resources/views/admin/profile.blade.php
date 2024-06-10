@@ -11,18 +11,18 @@
                         <div class="card-title m-0">
                             <h3 class="fw-bold m-0">Profile Details</h3>
                         </div>
-                        <a href="{{ route('admin-profile-edit') }}" class="btn btn-sm btn-primary align-self-center">Edit
+                        <a href="{{ route('admin.profile-edit') }}" class="btn btn-sm btn-primary align-self-center">Edit
                             Profile</a>
                     </div>
                     <div class="card-body p-9">
                         <div class="row mb-7">
-                            <label class="col-lg-4 fw-semibold text-muted">Full Name</label>
+                            <label class="col-lg-4 fw-semibold text-muted">Name</label>
                             <div class="col-lg-8">
                                 <span class="fw-bold fs-6 text-gray-800">{{ auth()->user()->profil->name }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
-                            <label class="col-lg-4 fw-semibold text-muted">Contact Phone
+                            <label class="col-lg-4 fw-semibold text-muted">Phone Number
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Phone number must be active">
                                     <i class="ki-duotone ki-information fs-7">
                                         <span class="path1"></span>
@@ -71,7 +71,7 @@
                                 <div class="fw-semibold">
                                     <h4 class="text-gray-900 fw-bold">Profile Information</h4>
                                     <div class="fs-6 text-gray-700">Please ensure your profile information is up-to-date.
-                                        If you need to make any changes, click on the <a class="fw-bold" href="{{ route('admin-profile-edit') }}">Edit Profile</a> button above.
+                                        If you need to make any changes, click on the <a class="fw-bold" href="{{ route('admin.profile-edit') }}">Edit Profile</a> button above.
                                     </div>
                                 </div>
                             </div>
@@ -82,3 +82,4 @@
         </div>
     </div>
 @endsection
+

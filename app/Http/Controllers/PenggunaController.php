@@ -64,7 +64,7 @@ class PenggunaController extends Controller
     }
 
     public function update(Request $request)
-{
+    {
     try {
         $request->validate([
             'name' => 'required|string|max:100',
@@ -95,9 +95,9 @@ class PenggunaController extends Controller
         }
 
         return response()->json(['success' => 'User updated successfully']);
-    } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
         return response()->json(['message' => $th->getMessage() ], 500);
+        }
     }
-}
 
 }
