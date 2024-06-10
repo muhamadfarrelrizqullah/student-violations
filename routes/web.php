@@ -40,6 +40,7 @@ Route::get('/admin/student', [SiswaController::class, 'index'])->name('admin-stu
 Route::get('/admin/class', [KelasController::class, 'index'])->name('admin-class');
 Route::get('/admin/user', [PenggunaController::class, 'index'])->name('admin-user');
 Route::get('/admin/profile', [ProfilController::class, 'index'])->name('admin-profile');
+Route::get('/admin/profile-edit', [ProfilController::class, 'edit'])->name('admin-profile-edit');
 
 Route::get('/category', [KategoriController::class, 'read'])->name('datakategori');
 Route::put('/category/update', [KategoriController::class, 'update'])->name('datakategori.update');

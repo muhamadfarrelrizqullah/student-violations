@@ -18,7 +18,7 @@ class PelanggaranSeeder extends Seeder
             'student_id' => 1, 
             'category_id' => 1, 
             'sanction_id' => 1,
-            'teacher_id' => 2,
+            'teacher_id' => 3,
             'date' => Carbon::now(), 
             'description' => 'Terlambat', 
         ]);
@@ -27,7 +27,7 @@ class PelanggaranSeeder extends Seeder
             'student_id' => 2, 
             'category_id' => 2, 
             'sanction_id' => 2,
-            'teacher_id' => 2,
+            'teacher_id' => 4,
             'date' => Carbon::now(),
             'description' => 'Tidak memakai seragam', 
         ]);
@@ -36,7 +36,7 @@ class PelanggaranSeeder extends Seeder
             'student_id' => 3, 
             'category_id' => 3, 
             'sanction_id' => 3,
-            'teacher_id' => 2,
+            'teacher_id' => 3,
             'date' => Carbon::now(), 
             'description' => 'Bolos', 
         ]);
@@ -45,7 +45,7 @@ class PelanggaranSeeder extends Seeder
             'student_id' => 4, 
             'category_id' => 4, 
             'sanction_id' => 4,
-            'teacher_id' => 2,
+            'teacher_id' => 5,
             'date' => Carbon::now(), 
             'description' => 'Merokok', 
         ]);
@@ -54,7 +54,7 @@ class PelanggaranSeeder extends Seeder
             'student_id' => 5, 
             'category_id' => 5, 
             'sanction_id' => 5,
-            'teacher_id' => 2,
+            'teacher_id' => 5,
             'date' => Carbon::now(),
             'description' => 'Berkelahi',
         ]);

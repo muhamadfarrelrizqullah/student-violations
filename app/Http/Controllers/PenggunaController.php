@@ -68,7 +68,7 @@ class PenggunaController extends Controller
     try {
         $request->validate([
             'name' => 'required|string|max:100',
-            'noTelp' => 'required|string|max:100', // Ensure this is validated
+            'noTelp' => 'required|string|max:100', 
             'email' => 'required|email|unique:penggunas,email,'. $request->id,
             'password' => 'required|min:5',
             'role' => 'required|in:Admin,Guru,Teknisi',

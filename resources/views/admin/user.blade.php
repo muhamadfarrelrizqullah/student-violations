@@ -241,9 +241,9 @@
                         name: 'role',
                         render: function(data, type, row) {
                             if (data === 'Admin') {
-                                return `<span class="badge bg-primary">${data}</span>`;
+                                return `<span class="badge badge-light-primary">${data}</span>`;
                             } else if (data === 'Guru') {
-                                return `<span class="badge bg-secondary">${data}</span>`;
+                                return `<span class="badge badge-light-secondary">${data}</span>`;
                             } else {
                                 return data;
                             }
@@ -254,9 +254,9 @@
                         name: 'status',
                         render: function(data, type, row) {
                             if (data === 'Aktif') {
-                                return `<span class="badge bg-success">${data}</span>`;
+                                return `<span class="badge badge-light-success">${data}</span>`;
                             } else if (data === 'Tidak Aktif') {
-                                return `<span class="badge bg-danger">${data}</span>`;
+                                return `<span class="badge badge-light-danger">${data}</span>`;
                             } else {
                                 return data;
                             }
