@@ -52,16 +52,19 @@ Route::get('/class', [KelasController::class, 'read'])->name('datakelas');
 Route::put('/class/update', [KelasController::class, 'update'])->name('datakelas.update');
 Route::delete('/class/{id}', [KelasController::class, 'destroy'])->name('datakelas.destroy');
 Route::post('/class/store', [KelasController::class, 'store'])->name('datakelas.store');
+Route::get('/export-excel/class', [ExcelController::class, 'exportClass'])->name('export.excel-class');
 
 Route::get('/sanction', [SanksiController::class, 'read'])->name('datasanksi');
 Route::put('/sanction/update', [SanksiController::class, 'update'])->name('datasanksi.update');
 Route::delete('/sanction/{id}', [SanksiController::class, 'destroy'])->name('datasanksi.destroy');
 Route::post('/sanction/store', [SanksiController::class, 'store'])->name('datasanksi.store');
+Route::get('/export-excel/sanction', [ExcelController::class, 'exportSanction'])->name('export.excel-sanction');
 
 Route::get('/user', [PenggunaController::class, 'read'])->name('datapengguna');
 Route::put('/user/update', [PenggunaController::class, 'update'])->name('datapengguna.update');
 Route::delete('/user/{id}', [PenggunaController::class, 'destroy'])->name('datapengguna.destroy');
 Route::post('/user/store', [PenggunaController::class, 'store'])->name('datapengguna.store');
+Route::get('/export-excel/user', [ExcelController::class, 'exportUser'])->name('export.excel-user');
 
 Route::get('/student', [SiswaController::class, 'read'])->name('datasiswa');
 Route::put('/student/update', [SiswaController::class, 'update'])->name('datasiswa.update');

@@ -449,7 +449,6 @@
         #tabelPelanggaran td,
         #tabelPelanggaran th {
             text-align: center;
-            font-size: 13px;
             white-space: nowrap;
         }
 

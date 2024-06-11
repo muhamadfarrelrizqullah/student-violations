@@ -68,4 +68,32 @@ class ExcelController extends Controller
 
         return (new FastExcel($data))->download('category_report.xlsx');
     }
+
+    public function exportSanction(Request $request)
+    {
+
+        $data = Sanksi::select(['id', 'name', 'points'])
+        ->get(); 
+
+        return (new FastExcel($data))->download('sanction_report.xlsx');
+    }
+
+    public function exportClass(Request $request)
+    {
+
+        $data = Kelas::select(['id', 'name', 'major'])
+        ->get(); 
+
+        return (new FastExcel($data))->download('class_report.xlsx');
+    }
+
+    public function exportUser(Request $request)
+    {
+
+        $data = Pengguna::leftJoin('profils', 'penggunas.id', '=', 'profils.user_id')
+        ->select(['penggunas.id', 'penggunas.email', 'penggunas.role', 'penggunas.status', 'profils.name', 'profils.phone'])
+        ->get(); 
+
+        return (new FastExcel($data))->download('user_report.xlsx');
+    }
 }
