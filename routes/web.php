@@ -9,6 +9,7 @@ use App\Http\Controllers\SanksiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\ExcelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::get('/category', [KategoriController::class, 'read'])->name('datakategori
 Route::put('/category/update', [KategoriController::class, 'update'])->name('datakategori.update');
 Route::delete('/category/{id}', [KategoriController::class, 'destroy'])->name('datakategori.destroy');
 Route::post('/category/store', [KategoriController::class, 'store'])->name('datakategori.store');
+Route::get('/export-excel/category', [ExcelController::class, 'exportCategory'])->name('export.excel-category');
 
 Route::get('/class', [KelasController::class, 'read'])->name('datakelas');
 Route::put('/class/update', [KelasController::class, 'update'])->name('datakelas.update');
@@ -65,11 +67,13 @@ Route::get('/student', [SiswaController::class, 'read'])->name('datasiswa');
 Route::put('/student/update', [SiswaController::class, 'update'])->name('datasiswa.update');
 Route::delete('/student/{id}', [SiswaController::class, 'destroy'])->name('datasiswa.destroy');
 Route::post('/student/store', [SiswaController::class, 'store'])->name('datasiswa.store');
+Route::get('/export-excel/student', [ExcelController::class, 'exportStudent'])->name('export.excel-student');
 
 Route::get('/violation', [PelanggaranController::class, 'read'])->name('datapelanggaran');
 Route::put('/violation/update', [PelanggaranController::class, 'update'])->name('datapelanggaran.update');
 Route::delete('/violation/{id}', [PelanggaranController::class, 'destroy'])->name('datapelanggaran.destroy');
 Route::post('/violation/store', [PelanggaranController::class, 'store'])->name('datapelanggaran.store');
+Route::get('/export-excel/violation-admin', [ExcelController::class, 'exportViolationAdmin'])->name('export.excel-violation-admin');
 
 Route::get('/admin/profile-edit', [ProfilController::class, 'edit'])->name('admin.profile-edit');
 Route::post('/admin/profile-edit-process', [ProfilController::class, 'update'])->name('admin.profile-edit-proses');

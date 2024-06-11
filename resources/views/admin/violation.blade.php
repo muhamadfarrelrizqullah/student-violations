@@ -17,7 +17,12 @@
                         <li class="breadcrumb-item text-muted">Violations</li>
                     </ul>
                 </div>
-
+                <div class="d-flex align-items-center gap-2 gap-lg-3">
+                    <input type="date" id="bt-date" name="date" class="form-control form-control-sm me-2">
+                    <button type="button" class="btn btn-sm fw-bold btn-secondary" id="bt-download">
+                        Download
+                    </button>
+                </div>
             </div>
         </div>
         <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -179,6 +184,40 @@
 
 @push('script')
     <script>
+        document.getElementById('bt-download').addEventListener('click', function() {
+            var selectedDate = document.getElementById('bt-date').value;
+
+            if (!selectedDate) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Please select a date before downloading the report!',
+                });
+                return;
+            }
+
+            var hasRecords = false;
+            tabel.rows().every(function() {
+                var rowData = this.data();
+                if (rowData.date === selectedDate) {
+                    hasRecords = true;
+                    return false; 
+                }
+            });
+
+            if (!hasRecords) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'No Records Found',
+                    text: 'No violations found for the selected date in the table.',
+                });
+                return;
+            }
+
+            var selectedDate = document.getElementById('bt-date').value;
+            window.location.href = '/export-excel/violation-admin?date=' + encodeURIComponent(selectedDate);
+        });
+
         $(document).ready(function() {
             tabel = $('#tabelPelanggaran').DataTable({
                 processing: true,
@@ -210,7 +249,13 @@
                     },
                     {
                         data: 'date',
-                        name: 'date'
+                        name: 'date',
+                        render: function(data, type, full, meta) {
+                            if (type === 'display' || type === 'filter') {
+                                return moment(data).format('DD/MM/YYYY');
+                            }
+                            return data;
+                        }
                     },
                     {
                         data: null,

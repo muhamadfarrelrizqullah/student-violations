@@ -18,6 +18,9 @@
                     </ul>
                 </div>
                 <div class="d-flex align-items-center gap-2 gap-lg-3">
+                    <button type="button" class="btn btn-sm fw-bold btn-secondary" id="bt-download">
+                        Download
+                    </button>
                     <button type="button" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalTambah">
                         Add Student
@@ -175,6 +178,10 @@
 
 @push('script')
     <script>
+        document.getElementById('bt-download').addEventListener('click', function() {
+            window.location.href = '/export-excel/student';
+        });
+
         $(document).ready(function() {
             tabel = $('#tabelSiswa').DataTable({
                 processing: true,
