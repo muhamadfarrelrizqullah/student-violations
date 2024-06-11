@@ -230,7 +230,14 @@
                     },
                     {
                         data: 'phone',
-                        name: 'phone'
+                        name: 'phone',
+                        render: function(data, type, row) {
+                            let phoneNumber = data.replace(/\D/g,
+                                '');
+                            return '<a href="https://wa.me/' + phoneNumber +
+                                '" target="_blank" class="fw-semibold text-muted text-hover-primary">' +
+                                data + '</a>';
+                        }
                     },
                     {
                         data: 'email',

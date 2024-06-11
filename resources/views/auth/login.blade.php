@@ -12,7 +12,6 @@
     <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 </head>
 
-
 <body id="kt_body" class="app-blank bgi-size-cover bgi-attachment-fixed bgi-position-center">
     <script>
         var defaultThemeMode = "light";
@@ -63,7 +62,7 @@
                     <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px">
                         <div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">
                             <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST"
-                                action="/auth" data-kt-redirect-url="index.html" action="#">
+                                action="/auth">
                                 @csrf
                                 <div class="text-center mb-11">
                                     <h1 class="text-gray-900 fw-bolder mb-3">Welcome Back!</h1>
@@ -79,7 +78,7 @@
                                 </div>
                                 <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                                     <div></div>
-                                    <a href="authentication/layouts/overlay/reset-password.html"
+                                    <a href="#"
                                         class="link-primary">Forgot Password ?</a>
                                 </div>
                                 <div class="d-grid mb-10">
@@ -100,8 +99,8 @@
                                     class="theme-dark-show h-20px app-sidebar-logo-default" />
                             </div>
                             <div class="d-flex fw-semibold text-primary fs-base gap-5">
-                                <a href="pages/team.html" target="_blank">Terms</a>
-                                <a href="pages/pricing/column.html" target="_blank">Plans</a>
+                                <a href="#" target="_blank">Terms</a>
+                                <a href="#" target="_blank">Plans</a>
                             </div>
                         </div>
                     </div>

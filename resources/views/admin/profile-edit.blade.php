@@ -49,6 +49,27 @@
                                             class="form-control form-control-lg form-control-solid" />
                                     </div>
                                 </div>
+                                <div class="row mb-6">
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Email</label>
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="email" id="editEmail" name="email" value="{{ $users->email }}"
+                                            class="form-control form-control-lg form-control-solid" />
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Password</label>
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="password" id="editPassword" name="password" placeholder="Enter your password"
+                                            class="form-control form-control-lg form-control-solid" />
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Confirm Password</label>
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="password" id="editConfirmPassword" name="confirmPassword" placeholder="Confirm your password"
+                                            class="form-control form-control-lg form-control-solid" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
                                 <button type="reset" class="btn btn-light btn-active-light-primary me-2"><a

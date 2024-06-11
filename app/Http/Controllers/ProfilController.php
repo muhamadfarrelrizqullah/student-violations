@@ -32,11 +32,14 @@ class ProfilController extends Controller
                 'name' => 'required|string|max:100',
                 'phone' => 'required|string|max:100',
                 'email' => 'required|email|unique:penggunas,email,'. $userId,
+                'password' => 'required|min:5',
+                'confirmPassword' => 'required|same:password',
             ]);
 
             $user = Pengguna::findOrFail($userId);
                 
             $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
             $user->save();
 
             $profil = Profil::where('user_id', $userId)->first();

@@ -112,7 +112,7 @@
                                     <div class="fw-bold d-flex align-items-center fs-8">{{ auth()->user()->profil->name }}<span
                                             class="badge badge-light-primary fw-bold fs-8 px-2 py-1 ms-2">{{ auth()->user()->role }}</span>
                                     </div>
-                                    <a href="#"
+                                    <a href="mailto:{{ auth()->user()->email }}"
                                         class="fw-semibold text-muted text-hover-primary fs-9">{{ auth()->user()->email }}</a>
                                 </div>
                             </div>
