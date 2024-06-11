@@ -54,4 +54,18 @@ class ProfilController extends Controller
             return response()->json(['message' => $th->getMessage()], 500);
         }
     }
+
+    public function indexTeacher()
+    {
+        return view('teacher.profile');
+    }
+
+    public function editTeacher()
+    {
+        $userId = Auth::id();
+        $users = Pengguna::findOrFail($userId); 
+        $profiles = Profil::where('user_id', $userId)->first();
+
+        return view('teacher.profile-edit', compact('users', 'profiles'));
+    }
 }

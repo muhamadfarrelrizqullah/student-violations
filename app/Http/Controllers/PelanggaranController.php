@@ -98,6 +98,16 @@ class PelanggaranController extends Controller
         }
     }
 
+    public function indexTeacher()
+    {
+        $students = Siswa::all();
+        $categories = Kategori::all();
+        $sanctions = Sanksi::all();
+        $users = Pengguna::where('role', 'guru')->get();
+        $profiles = Profil::with('pengguna')->get();
+        return view('teacher.violation', compact('students', 'categories', 'sanctions', 'users', 'profiles'));
+    }
+
 }
 
 

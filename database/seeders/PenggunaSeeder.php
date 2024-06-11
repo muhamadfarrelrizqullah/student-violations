@@ -26,20 +26,20 @@ class PenggunaSeeder extends Seeder
             'status' => 'Aktif',
         ]);
         Pengguna::create([
-            'email' => 'guru@gmail.com',
-            'password' => bcrypt('guru'),
+            'email' => 'teacher@gmail.com',
+            'password' => bcrypt('teacher'),
             'role' => 'Guru',
             'status' => 'Aktif',
         ]);
         Pengguna::create([
-            'email' => 'guru2@gmail.com',
-            'password' => bcrypt('guru'),
+            'email' => 'teacher2@gmail.com',
+            'password' => bcrypt('teacher'),
             'role' => 'Guru',
             'status' => 'Aktif',
         ]);
         Pengguna::create([
-            'email' => 'guru3@gmail.com',
-            'password' => bcrypt('guru'),
+            'email' => 'teacher3@gmail.com',
+            'password' => bcrypt('teacher'),
             'role' => 'Guru',
             'status' => 'Aktif',
         ]);

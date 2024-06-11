@@ -76,4 +76,10 @@ class SiswaController extends Controller
             return response()->json(['message' => $th->getMessage() ], 500);
         }
     }
+
+    public function indexTeacher()
+    {
+        $classes = Kelas::all();
+        return view('teacher.student', compact('classes'));
+    }
 }

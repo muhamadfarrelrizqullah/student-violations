@@ -1,6 +1,6 @@
-@extends('admin.template.main')
+@extends('teacher.template.main')
 
-@section('title', 'Violations - EduGuard')
+@section('title', 'Students - EduGuard')
 
 @section('content')
     <div class="d-flex flex-column flex-column-fluid">
@@ -8,19 +8,22 @@
             <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                     <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                        Violation Data</h1>
+                        Student Data</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                         <li class="breadcrumb-item text-muted">Home</li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
-                        <li class="breadcrumb-item text-muted">Violations</li>
+                        <li class="breadcrumb-item text-muted">Students</li>
                     </ul>
                 </div>
                 <div class="d-flex align-items-center gap-2 gap-lg-3">
-                    <input type="date" id="bt-date" name="date" class="form-control form-control-sm me-2">
                     <button type="button" class="btn btn-sm fw-bold btn-secondary" id="bt-download">
                         Download
+                    </button>
+                    <button type="button" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#modalTambah">
+                        Add Student
                     </button>
                 </div>
             </div>
@@ -32,16 +35,14 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="tabelPelanggaran" class="table hover stripe" style="width: 100%">
+                                    <table id="tabelSiswa" class="table hover stripe" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Student Name</th>
+                                                <th>Name</th>
+                                                <th>NIS</th>
                                                 <th>Class</th>
-                                                <th>Category</th>
-                                                <th>Sanction</th>
-                                                <th>Teacher Name</th>
-                                                <th>Date</th>
+                                                <th>Major</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -62,14 +63,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalDetailLabel">Detail Violation</h5>
+                    <h5 class="modal-title" id="modalDetailLabel">Detail Student</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="detailStudentName" class="form-label">Student Name:</label>
-                            <input type="text" class="form-control" id="detailStudentName" readonly>
+                            <label for="detailName" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="detailName" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="detailNis" class="form-label">NIS:</label></label>
@@ -80,32 +81,8 @@
                             <input type="text" class="form-control" id="detailClassName" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="detailCategoryName" class="form-label">Category:</label></label>
-                            <input type="text" class="form-control" id="detailCategoryName" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="detailDate" class="form-label">Date:</label></label>
-                            <input type="text" class="form-control" id="detailDate" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="detailDescription" class="form-label">Description:</label></label>
-                            <input type="textarea" class="form-control" id="detailDescription" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="detailSanctionName" class="form-label">Sanction:</label></label>
-                            <input type="text" class="form-control" id="detailSanctionName" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="detailTeacherName" class="form-label">Teacher Name:</label></label>
-                            <input type="text" class="form-control" id="detailTeacherName" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="detailPhoneNumber" class="form-label">Teacher Phone Number:</label></label>
-                            <input type="number" class="form-control" id="detailPhoneNumber" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="detailTeacherEmail" class="form-label">Teacher Email:</label></label>
-                            <input type="email" class="form-control" id="detailTeacherEmail" readonly>
+                            <label for="detailMajor" class="form-label">Major:</label></label>
+                            <input type="text" class="form-control" id="detailMajor" readonly>
                         </div>
                     </form>
                 </div>
@@ -121,7 +98,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditLabel">Edit Violation</h5>
+                    <h5 class="modal-title" id="modalEditLabel">Edit Student</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -129,46 +106,22 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <label for="updateStudentId" class="form-label">Student Name:</label>
-                            <select class="form-control" id="updateStudentId" name="student_id">
-                                @foreach ($students as $student)
-                                    <option value="{{ $student->id }}">{{ $student->name }} - {{ $student->nis }}</option>
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="updateName" name="name"
+                                placeholder="Enter the student name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nis" class="form-label">NIS:</label>
+                            <input type="number" class="form-control" id="updateNis" name="nis"
+                                placeholder="Enter the student nis">
+                        </div>
+                        <div class="mb-3">
+                            <label for="updateClassId" class="form-label">Class:</label>
+                            <select class="form-control" id="updateClassId" name="class_id">
+                                @foreach ($classes as $class)
+                                    <option value="{{ $class->id }}">{{ $class->name }} - {{ $class->major }}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="updateCategoryId" class="form-label">Category:</label>
-                            <select class="form-control" id="updateCategoryId" name="category_id">
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="updateSanctionId" class="form-label">Sanction:</label>
-                            <select class="form-control" id="updateSanctionId" name="sanction_id">
-                                @foreach ($sanctions as $sanction)
-                                    <option value="{{ $sanction->id }}">{{ $sanction->name }} - {{ $sanction->points }}
-                                        Points</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="updateUserId" class="form-label">Teacher Name:</label>
-                            <select class="form-control" id="updateUserId" name="user_id">
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->profil->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="date" class="form-label">Date:</label>
-                            <input type="date" class="form-control" id="updateDate" name="date">
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description:</label>
-                            <input type="text" class="form-control" id="updateDescription" name="description"
-                                placeholder="Enter the violation description">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -180,82 +133,79 @@
             </div>
         </div>
     </div>
+
+    <div id="modalTambah" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalTambahLabel"
+        aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTambahLabel">Add Student
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('datasiswa.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="addName" name="name"
+                                placeholder="Enter the student name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nis" class="form-label">NIS:</label>
+                            <input type="number" class="form-control" id="addNis" name="nis"
+                                placeholder="Enter the student nis">
+                        </div>
+                        <div class="mb-3">
+                            <label for="class_id" class="form-label">Class:</label>
+                            <select class="form-control" id="addClass" name="class_id">
+                                <option selected disabled>Select Student Class</option>
+                                @foreach ($classes as $class)
+                                    <option value="{{ $class->id }}">{{ $class->name }} - {{ $class->major }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('script')
     <script>
         document.getElementById('bt-download').addEventListener('click', function() {
-            var selectedDate = document.getElementById('bt-date').value;
-
-            if (!selectedDate) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Oops...',
-                    text: 'Please select a date before downloading the report!',
-                });
-                return;
-            }
-
-            var hasRecords = false;
-            tabel.rows().every(function() {
-                var rowData = this.data();
-                if (rowData.date === selectedDate) {
-                    hasRecords = true;
-                    return false; 
-                }
-            });
-
-            if (!hasRecords) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'No Records Found',
-                    text: 'No violations found for the selected date in the table.',
-                });
-                return;
-            }
-
-            var selectedDate = document.getElementById('bt-date').value;
-            window.location.href = '/export-excel/violation?date=' + encodeURIComponent(selectedDate);
+            window.location.href = '/export-excel/student';
         });
 
         $(document).ready(function() {
-            tabel = $('#tabelPelanggaran').DataTable({
+            tabel = $('#tabelSiswa').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('datapelanggaran') }}",
+                ajax: "{{ route('datasiswa') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                     },
                     {
-                        data: 'student_name',
-                        name: 'student_name'
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'nis',
+                        name: 'nis'
                     },
                     {
                         data: 'class_name',
                         name: 'class_name'
                     },
                     {
-                        data: 'category_name',
-                        name: 'category_name'
-                    },
-                    {
-                        data: 'sanction_name',
-                        name: 'sanction_name'
-                    },
-                    {
-                        data: 'teacher_name',
-                        name: 'teacher_name'
-                    },
-                    {
-                        data: 'date',
-                        name: 'date',
-                        render: function(data, type, full, meta) {
-                            if (type === 'display' || type === 'filter') {
-                                return moment(data).format('DD/MM/YYYY');
-                            }
-                            return data;
-                        }
+                        data: 'major',
+                        name: 'major'
                     },
                     {
                         data: null,
@@ -263,11 +213,10 @@
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row, meta) {
-                            return `<button type="button" onclick="modalDetail('${row.student_name}','${row.nis}','${row.class_name}','${row.category_name}','${row.date}','${row.description}','${row.sanction_name}','${row.teacher_name}','${row.phone_number}','${row.teacher_email}')"
-                                                    class="btn btn-primary btn-sm btn-icon-text"><i 
+                            return `<button type="button" onclick="modalDetail('${row.name}','${row.nis}','${row.class_name}','${row.major}')"class="btn btn-primary btn-sm btn-icon-text"><i 
                                                     class="link-icon" data-feather="eye" data-bs-toggle="modal"
                                                     data-bs-target="#modalDetail"></i> </button>
-                                    <button type="button" onclick="modalEdit('${row.id}','${row.student_id}','${row.category_id}','${row.date}','${row.description}','${row.sanction_id}','${row.user_id}')" class="btn btn-success btn-sm btn-icon-text"><i
+                                    <button type="button" onclick="modalEdit('${row.id}','${row.name}','${row.nis}','${row.class_id}')" class="btn btn-success btn-sm btn-icon-text"><i
                                                     class="link-icon" data-feather="edit" data-bs-toggle="modal"
                                                     data-bs-target="#modalEdit" onclick="#"></i> </button>
                                     <button type="button" onclick="deleteData(${row.id})" class="btn btn-danger btn-sm btn-icon-text"><i
@@ -303,43 +252,62 @@
         });
 
         $(window).resize(function() {
-            $('#tabelPelanggaran').DataTable().columns.adjust().responsive.recalc();
+            $('#tabelSiswa').DataTable().columns.adjust().responsive.recalc();
         });
 
-        function modalDetail(student_name, nis, class_name, category_name, date, description, sanction_name, teacher_name,
-            phone_number, teacher_email) {
-            $('#detailStudentName').val(student_name);
+        function modalDetail(name, nis, class_name, major) {
+            $('#detailName').val(name);
             $('#detailNis').val(nis);
             $('#detailClassName').val(class_name);
-            $('#detailCategoryName').val(category_name);
-            $('#detailDate').val(date);
-            $('#detailDescription').val(description);
-            $('#detailSanctionName').val(sanction_name);
-            $('#detailTeacherName').val(teacher_name);
-            $('#detailPhoneNumber').val(phone_number);
-            $('#detailTeacherEmail').val(teacher_email);
+            $('#detailMajor').val(major);
             $('#modalDetail').modal('show');
         }
 
         $(document).on('click', '.detail-btn', function() {
-            var student_name = $(this).data('student_name');
+            var name = $(this).data('name');
             var nis = $(this).data('nis');
             var class_name = $(this).data('class_name');
-            var category_name = $(this).data('category_name');
-            var date = $(this).data('date');
-            var description = $(this).data('description');
-            var sanction_name = $(this).data('sanction_name');
-            var teacher_name = $(this).data('teacher_name');
-            var phone_number = $(this).data('phone_number');
-            var teacher_email = $(this).data('teacher_email');
+            var major = $(this).data('major');
 
-            modalDetail(student_name, nis, class_name, category_name, date, description, sanction_name,
-                teacher_name, phone_number, teacher_email);
+            modalDetail(name, nis, class_name, major);
         });
 
-        $('#modalEdit, #modalDetail').on('hidden.bs.modal', function() {
+        $('#modalTambah, #modalEdit, #modalDetail').on('hidden.bs.modal', function() {
             $(this).find('form')[0].reset();
         });
+
+        $('#modalTambah form').on('submit', function(e) {
+            e.preventDefault();
+            let data = $(this).serialize();
+            let form = $(this);
+
+            $.ajax({
+                url: form.attr('action'),
+                type: "POST",
+                data: data,
+                success: function(response) {
+                    console.log(response);
+                    $('#modalTambah').modal('hide');
+                    tabel.ajax.reload();
+
+                    Swal.fire(
+                        'Success!',
+                        'Student has been added.',
+                        'success'
+                    );
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseJSON.message);
+
+                    Swal.fire(
+                        'Error!',
+                        'Error adding student: ' + xhr.responseJSON.message,
+                        'error'
+                    );
+                }
+            });
+        });
+
 
         function deleteData(id) {
             Swal.fire({
@@ -352,7 +320,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`violation/${id}`, {
+                    fetch(`student/${id}`, {
                             method: 'DELETE',
                             headers: {
                                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
@@ -403,7 +371,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('datapelanggaran.update') }}",
+                        url: "{{ route('datasiswa.update') }}",
                         type: "POST",
                         data: data,
                         success: function(response) {
@@ -431,14 +399,11 @@
             });
         });
 
-        function modalEdit(id, student_id, category_id, date, description, sanction_id, user_id) {
+        function modalEdit(id, name, nis, class_id) {
             $('#id').val(id);
-            $('#updateStudentId').val(student_id);
-            $('#updateCategoryId').val(category_id);
-            $('#updateDate').val(date);
-            $('#updateDescription').val(description);
-            $('#updateSanctionId').val(sanction_id);
-            $('#updateUserId').val(user_id);
+            $('#updateName').val(name);
+            $('#updateNis').val(nis);
+            $('#updateClassId').val(class_id);
             $('#modalEdit').modal('show');
         }
     </script>
@@ -446,31 +411,33 @@
 
 @push('style')
     <style>
-        #tabelPelanggaran td,
-        #tabelPelanggaran th {
+        #tabelSiswa td,
+        #tabelSiswa th {
             text-align: center;
+            font-size: 15px;
             white-space: nowrap;
         }
 
-        #tabelPelanggaran th {
+        #tabelSiswa th {
             font-weight: bold;
         }
 
-        #tabelPelanggaran thead th:first-child {
+        #tabelSiswa thead th:first-child {
             cursor: default;
         }
 
-        #tabelPelanggaran thead th:first-child::after,
-        #tabelPelanggaran thead th:first-child::before {
+        #tabelSiswa thead th:first-child::after,
+        #tabelSiswa thead th:first-child::before {
             display: none !important;
             pointer-events: none;
         }
 
         @media only screen and (max-width: 768px) {
-            #tabelPelanggaran td {
+            #tabelSiswa td {
                 white-space: normal;
                 word-wrap: break-word;
             }
         }
     </style>
 @endpush
+

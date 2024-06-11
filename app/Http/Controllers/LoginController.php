@@ -33,7 +33,7 @@ class LoginController extends Controller
             if (Auth::user()->role == 'Admin') {
                 return redirect('/admin/dashboard')->with('success', 'Login successful!');
             } else if (Auth::user()->role == 'Guru') {
-                return redirect('/guru/dashboard')->with('success', 'Login successful!');
+                return redirect('/teacher/dashboard')->with('success', 'Login successful!');
             }
         } else {
             Auth::logout();
@@ -41,8 +41,7 @@ class LoginController extends Controller
         }
     } else {
         return redirect('/login')->with('error', 'Invalid email or password.');
-    } 
-                
+    }      
     }
 
     public function login()
@@ -61,8 +60,8 @@ class LoginController extends Controller
         return view('admin.dashboard');
     }
 
-    public function guru()
+    public function teacher()
     {
-        return view('guru.dashboard');
+        return view('teacher.dashboard');
     }
 }

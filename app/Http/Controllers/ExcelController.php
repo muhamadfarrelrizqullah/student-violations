@@ -16,7 +16,7 @@ use Carbon\Carbon;
 
 class ExcelController extends Controller
 {
-    public function exportViolationAdmin(Request $request)
+    public function exportViolation(Request $request)
     {
         $request->validate([
             'date' => 'required|date',

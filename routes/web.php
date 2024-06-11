@@ -76,10 +76,16 @@ Route::get('/violation', [PelanggaranController::class, 'read'])->name('datapela
 Route::put('/violation/update', [PelanggaranController::class, 'update'])->name('datapelanggaran.update');
 Route::delete('/violation/{id}', [PelanggaranController::class, 'destroy'])->name('datapelanggaran.destroy');
 Route::post('/violation/store', [PelanggaranController::class, 'store'])->name('datapelanggaran.store');
-Route::get('/export-excel/violation-admin', [ExcelController::class, 'exportViolationAdmin'])->name('export.excel-violation-admin');
+Route::get('/export-excel/violation', [ExcelController::class, 'exportViolation'])->name('export.excel-violation');
 
 Route::get('/admin/profile-edit', [ProfilController::class, 'edit'])->name('admin.profile-edit');
 Route::post('/admin/profile-edit-process', [ProfilController::class, 'update'])->name('admin.profile-edit-proses');
 
-//Guru
-Route::get('/guru/dashboard', [LoginController::class, 'guru']);
+//Teacher
+Route::get('/teacher/dashboard', [LoginController::class, 'teacher'])->name('teacher-dashboard');
+Route::get('/teacher/violation', [PelanggaranController::class, 'indexTeacher'])->name('teacher-violation');
+Route::get('/teacher/student', [SiswaController::class, 'indexTeacher'])->name('teacher-student');
+Route::get('/teacher/profile', [ProfilController::class, 'indexTeacher'])->name('teacher-profile');
+
+Route::get('/teacher/profile-edit', [ProfilController::class, 'editTeacher'])->name('teacher.profile-edit');
+Route::post('/teacher/profile-edit-process', [ProfilController::class, 'update'])->name('teacher.profile-edit-proses');

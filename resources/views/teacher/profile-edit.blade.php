@@ -1,4 +1,4 @@
-@extends('admin.template.main')
+@extends('teacher.template.main')
 
 @section('title', 'Edit Profile - EduGuard')
 
@@ -16,7 +16,7 @@
                     </div>
                     <div id="kt_account_settings_profile_details" class="collapse show">
                         <form id="kt_account_profile_details_form" class="form"
-                            action="{{ route('admin.profile-edit-proses') }}" method="POST">
+                            action="{{ route('teacher.profile-edit-proses') }}" method="POST">
                             @csrf
                             <div class="card-body border-top p-9">
                                 <div class="row mb-6">
@@ -66,7 +66,7 @@
                             </div>
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
                                 <button type="reset" class="btn btn-light btn-active-light-primary me-2"><a
-                                        href="{{ route('admin-profile') }}">Discard</a></button>
+                                        href="{{ route('teacher-profile') }}">Discard</a></button>
                                 <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save
                                     Changes</button>
                             </div>
@@ -95,7 +95,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('admin.profile-edit-proses') }}",
+                        url: "{{ route('teacher.profile-edit-proses') }}",
                         type: "POST",
                         data: data,
                         success: function(response) {
@@ -106,7 +106,7 @@
                             ).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.href =
-                                        "{{ route('admin-profile') }}";
+                                        "{{ route('teacher-profile') }}";
                                 }
                             });
                         },

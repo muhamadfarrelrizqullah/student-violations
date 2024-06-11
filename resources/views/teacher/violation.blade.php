@@ -1,4 +1,4 @@
-@extends('admin.template.main')
+@extends('teacher.template.main')
 
 @section('title', 'Violations - EduGuard')
 
