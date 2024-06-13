@@ -223,6 +223,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('datapelanggaran') }}",
+                order: [[6, 'desc']],
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',

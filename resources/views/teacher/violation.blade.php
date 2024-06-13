@@ -17,11 +17,18 @@
                         <li class="breadcrumb-item text-muted">Violations</li>
                     </ul>
                 </div>
-                <div class="d-flex align-items-center gap-2 gap-lg-3">
-                    <input type="date" id="bt-date" name="date" class="form-control form-control-sm me-2">
-                    <button type="button" class="btn btn-sm fw-bold btn-secondary" id="bt-download">
-                        Download
-                    </button>
+                <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 gap-lg-3">
+                    <input type="date" id="bt-date" name="date"
+                        class="form-control form-control-sm mb-2 mb-lg-0 w-100">
+                    <div class="d-flex justify-content-between w-100 gap-2">
+                        <button type="button" class="btn btn-sm fw-bold btn-secondary w-100 w-lg-auto" id="bt-download">
+                            Download
+                        </button>
+                        <button type="button" class="btn btn-sm fw-bold btn-primary text-nowrap w-100 w-lg-auto"
+                            data-bs-toggle="modal" data-bs-target="#modalTambah">
+                            Add Violation
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,12 +161,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="updateUserId" class="form-label">Teacher Name:</label>
-                            <select class="form-control" id="updateUserId" name="user_id">
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->profil->name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="hidden" id="updateUserId" name="user_id" value="{{ old('user_id') }}">
                         </div>
                         <div class="mb-3">
                             <label for="date" class="form-label">Date:</label>
@@ -167,7 +169,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description:</label>
-                            <input type="text" class="form-control" id="updateDescription" name="description"
+                            <input type="textarea" class="form-control" id="updateDescription" name="description"
                                 placeholder="Enter the violation description">
                         </div>
                 </div>
@@ -175,6 +177,67 @@
                     <input type="hidden" id="id" name="id">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalTambah" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalTambahLabel"
+        aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTambahLabel">Add Violation
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('datapelanggaran.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="student_id" class="form-label">Student:</label>
+                            <select class="form-control" id="addStudent" name="student_id">
+                                <option selected disabled>Select Violation Student</option>
+                                @foreach ($students as $student)
+                                    <option value="{{ $student->id }}">{{ $student->name }} - {{ $student->nis }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category_id" class="form-label">Category:</label>
+                            <select class="form-control" id="addCategory" name="category_id">
+                                <option selected disabled>Select Violation Category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sanction_id" class="form-label">Sanction:</label>
+                            <select class="form-control" id="addSanction" name="sanction_id">
+                                <option selected disabled>Select Violation Sanction</option>
+                                @foreach ($sanctions as $sanction)
+                                    <option value="{{ $sanction->id }}">{{ $sanction->name }} - {{ $sanction->points }}
+                                        Points</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date:</label>
+                            <input type="date" class="form-control" id="addDate" name="date"
+                                placeholder="Enter the violation date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <input type="textarea" class="form-control" id="addDescription" name="description"
+                                placeholder="Enter the violation description">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" id="btnSave" class="btn btn-success">Save</button>
                 </div>
                 </form>
             </div>
@@ -201,7 +264,7 @@
                 var rowData = this.data();
                 if (rowData.date === selectedDate) {
                     hasRecords = true;
-                    return false; 
+                    return false;
                 }
             });
 
@@ -223,6 +286,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('datapelanggaran') }}",
+                order: [[6, 'desc']],
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',

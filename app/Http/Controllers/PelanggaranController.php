@@ -11,6 +11,7 @@ use App\Models\Profil;
 use App\Models\Kategori;
 use App\Models\Sanksi;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class PelanggaranController extends Controller
 {
@@ -66,6 +67,30 @@ class PelanggaranController extends Controller
     }
     $pelanggaran->delete();
     return response()->json(['message' => 'Violation deleted successfully.']);
+    }
+
+    public function store(Request $request)
+    {
+    $request->validate([
+        'student_id' => 'required|exists:siswas,id',
+        'category_id' => 'required|exists:kategoris,id',
+        'sanction_id' => 'required|exists:sanksis,id',
+        'date' => 'required',
+        'description' => 'required|string|max:255',
+    ]);
+
+    $userId = Auth::id();
+
+    $violation = new Pelanggaran;
+    $violation->student_id = $request->student_id;
+    $violation->category_id = $request->category_id;
+    $violation->sanction_id = $request->sanction_id;
+    $violation->teacher_id = $userId;
+    $violation->date = $request->date;
+    $violation->description = $request->description;
+    $violation->save();
+
+    return redirect()->back()->with('success', 'Violation added successfully');
     }
 
     public function update(Request $request)
