@@ -31,6 +31,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/auth', [LoginController::class, 'autentikasi']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
+Route::middleware('auth.custom')->group(function () {
 //Admin
 Route::get('/admin/dashboard', [LoginController::class, 'admin'])->name('admin-dashboard');
 Route::get('/admin/violation', [PelanggaranController::class, 'index'])->name('admin-violation');
@@ -89,3 +90,4 @@ Route::get('/teacher/profile', [ProfilController::class, 'indexTeacher'])->name(
 
 Route::get('/teacher/profile-edit', [ProfilController::class, 'editTeacher'])->name('teacher.profile-edit');
 Route::post('/teacher/profile-edit-process', [ProfilController::class, 'update'])->name('teacher.profile-edit-proses');
+});

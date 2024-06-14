@@ -78,8 +78,7 @@
                                 </div>
                                 <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                                     <div></div>
-                                    <a href="#"
-                                        class="link-primary">Forgot Password ?</a>
+                                    <a href="#" class="link-primary">Forgot Password ?</a>
                                 </div>
                                 <div class="d-grid mb-10">
                                     <button type="submit" class="btn btn-primary">
@@ -93,10 +92,10 @@
                         </div>
                         <div class="d-flex flex-stack">
                             <div class="me-10">
-                                <img alt="Logo" src="assets/media/logos/landing-dark.png"
-                                    class="theme-light-show h-20px app-sidebar-logo-default" />
-                                <img alt="Logo" src="assets/media/logos/landing.png"
-                                    class="theme-dark-show h-20px app-sidebar-logo-default" />
+                                <a href="/"><img alt="Logo" src="assets/media/logos/landing-dark.png"
+                                        class="theme-light-show h-20px app-sidebar-logo-default" /></a>
+                                <a href="/"><img alt="Logo" src="assets/media/logos/landing.png"
+                                        class="theme-dark-show h-20px app-sidebar-logo-default" /></a>
                             </div>
                             <div class="d-flex fw-semibold text-primary fs-base gap-5">
                                 <a href="#" target="_blank">Terms</a>
