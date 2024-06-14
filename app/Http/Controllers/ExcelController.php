@@ -96,4 +96,44 @@ class ExcelController extends Controller
 
         return (new FastExcel($data))->download('user_report.xlsx');
     }
+
+    public function exportViolationDashboard(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+        
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $formattedStartDate = date('Y-m-d', strtotime($start_date));
+        $formattedEndDate = date('Y-m-d', strtotime($end_date));
+
+        $data = Pelanggaran::join('siswas', 'pelanggarans.student_id', '=', 'siswas.id')
+        ->join('kelas', 'siswas.class_id', '=', 'kelas.id')
+        ->join('kategoris', 'pelanggarans.category_id', '=', 'kategoris.id')
+        ->join('sanksis', 'pelanggarans.sanction_id', '=', 'sanksis.id')
+        ->join('penggunas', 'pelanggarans.teacher_id', '=', 'penggunas.id')
+        ->join('profils', 'penggunas.id', '=', 'profils.user_id')
+        ->select([
+            'pelanggarans.id',
+            'siswas.name as student_name',
+            'siswas.nis',
+            'kelas.name as class_name',
+            'kelas.major',
+            'kategoris.name as category_name',
+            'sanksis.name as sanction_name',
+            'sanksis.points',
+            'pelanggarans.date',
+            'pelanggarans.description',
+            'profils.name as teacher_name',
+            'profils.phone as phone_number',
+            'penggunas.email as teacher_email',
+        ])
+        ->whereBetween('date', [$formattedStartDate, $formattedEndDate])
+        ->get();
+
+        return (new FastExcel($data))->download('violation_report.xlsx');
+    }
 }

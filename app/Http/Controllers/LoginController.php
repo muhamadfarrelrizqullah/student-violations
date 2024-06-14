@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use App\Models\Siswa;
+use App\Models\Pelanggaran;
+use App\Models\Kategori;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -57,7 +61,27 @@ class LoginController extends Controller
 
     public function admin()
     {
-        return view('admin.dashboard');
+        $studentsWithoutViolation = Siswa::whereDoesntHave('pelanggaran')->count();
+
+        $studentsWithViolation = Siswa::whereHas('pelanggaran')->count();
+
+        $totalStudents = Siswa::count();
+
+        $studentsWithHighPoints = Siswa::whereHas('pelanggaran', function ($query) {
+            $query->whereHas('sanksi', function ($subquery) {
+                $subquery->where('points', '>', 50);
+            });
+        })->count();
+
+        $categoriesData = Kategori::withCount('pelanggaran')
+        ->get();
+
+        $performance = Pelanggaran::select(DB::raw('DATE(date) as date'), DB::raw('COUNT(*) as pelanggaran_count'))
+        ->groupBy(DB::raw('DATE(date)'))
+        ->orderBy(DB::raw('DATE(date)'), 'asc')
+        ->get();
+
+        return view('admin.dashboard', compact('totalStudents','studentsWithoutViolation','studentsWithViolation','studentsWithHighPoints','categoriesData', 'performance'));
     }
 
     public function teacher()

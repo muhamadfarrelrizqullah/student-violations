@@ -27,6 +27,6 @@ class Siswa extends Model
 
     public function pelanggaran()
     {
-        return $this->hasMany(Pelanggaran::class, 'violation_id', 'id');
+        return $this->hasMany(Pelanggaran::class, 'student_id', 'id');
     }
 }

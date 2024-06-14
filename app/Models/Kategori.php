@@ -21,6 +21,6 @@ class Kategori extends Model
 
     public function pelanggaran()
     {
-        return $this->hasMany(Pelanggaran::class, 'violation_id', 'id');
+        return $this->hasMany(Pelanggaran::class, 'category_id', 'id');
     }
 }

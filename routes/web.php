@@ -76,6 +76,7 @@ Route::put('/violation/update', [PelanggaranController::class, 'update'])->name(
 Route::delete('/violation/{id}', [PelanggaranController::class, 'destroy'])->name('datapelanggaran.destroy');
 Route::post('/violation/store', [PelanggaranController::class, 'store'])->name('datapelanggaran.store');
 Route::get('/export-excel/violation', [ExcelController::class, 'exportViolation'])->name('export.excel-violation');
+Route::get('/export-excel/violation-dashboard', [ExcelController::class, 'exportViolationDashboard'])->name('export.excel-violationDashboard');
 
 Route::get('/admin/profile-edit', [ProfilController::class, 'edit'])->name('admin.profile-edit');
 Route::post('/admin/profile-edit-process', [ProfilController::class, 'update'])->name('admin.profile-edit-proses');
