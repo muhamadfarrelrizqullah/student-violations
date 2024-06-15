@@ -423,7 +423,7 @@
 
                     Swal.fire(
                         'Success!',
-                        'Student has been added.',
+                        'Violation has been added.',
                         'success'
                     );
                 },
@@ -432,7 +432,7 @@
 
                     Swal.fire(
                         'Error!',
-                        'Error adding student: ' + xhr.responseJSON.message,
+                        'Error adding violation: ' + xhr.responseJSON.message,
                         'error'
                     );
                 }
