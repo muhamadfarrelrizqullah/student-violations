@@ -36,9 +36,9 @@ class LoginController extends Controller
     if (Auth::attempt($infologin)) {
         if (Auth::user()->status == 'Aktif') {
             if (Auth::user()->role == 'Admin') {
-                return redirect('/admin/dashboard')->with('success', 'Login successful!');
+                return redirect('/admin/dashboard');
             } else if (Auth::user()->role == 'Guru') {
-                return redirect('/teacher/dashboard')->with('success', 'Login successful!');
+                return redirect('/teacher/dashboard');
             }
         } else {
             Auth::logout();

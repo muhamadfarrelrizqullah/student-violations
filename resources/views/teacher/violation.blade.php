@@ -286,7 +286,9 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('datapelanggaran') }}",
-                order: [[6, 'desc']],
+                order: [
+                    [6, 'desc']
+                ],
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -401,8 +403,40 @@
                 teacher_name, phone_number, teacher_email);
         });
 
-        $('#modalEdit, #modalDetail').on('hidden.bs.modal', function() {
+        $('#modalTambah, #modalEdit, #modalDetail').on('hidden.bs.modal', function() {
             $(this).find('form')[0].reset();
+        });
+
+        $('#modalTambah form').on('submit', function(e) {
+            e.preventDefault();
+            let data = $(this).serialize();
+            let form = $(this);
+
+            $.ajax({
+                url: form.attr('action'),
+                type: "POST",
+                data: data,
+                success: function(response) {
+                    console.log(response);
+                    $('#modalTambah').modal('hide');
+                    tabel.ajax.reload();
+
+                    Swal.fire(
+                        'Success!',
+                        'Student has been added.',
+                        'success'
+                    );
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseJSON.message);
+
+                    Swal.fire(
+                        'Error!',
+                        'Error adding student: ' + xhr.responseJSON.message,
+                        'error'
+                    );
+                }
+            });
         });
 
         function deleteData(id) {
