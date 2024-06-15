@@ -363,34 +363,70 @@
                 };
             });
             let options = {
-                series: chartData.map(data => data.y),
+                series: [{
+                    name: 'Violations',
+                    data: chartData.map(data => data.y)
+                }],
                 chart: {
-                    type: 'donut',
-                    height: 350
+                    type: 'bar',
+                    height: 300
                 },
-                labels: chartData.map(data => data.x),
-                plotOptions: {
-                    pie: {
-                        donut: {
-                            size: '65%',
-                        }
+                xaxis: {
+                    categories: chartData.map(data => data.x),
+                    title: {
+                        text: 'Violation Count'
                     }
+                },
+                yaxis: {
+                    title: {
+                        text: 'Categories',
+                        forceNiceScale: true
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: true
+                    }
+                },
+                dataLabels: {
+                    enabled: false
                 },
                 legend: {
                     position: 'bottom'
                 },
                 responsive: [{
-                    breakpoint: 480,
+                    breakpoint: 768,
                     options: {
                         chart: {
-                            width: 200
+                            height: 300,
+                            width: '100%',
+                            toolbar: {
+                                show: false
+                            }
                         },
+                        plotOptions: {
+                            bar: {
+                                horizontal: false
+                            }
+                        },
+                        xaxis: {
+                            title: {
+                                text: 'Categories'
+                            }
+                        },
+                        yaxis: {
+                            title: {
+                                text: 'Violation Count'
+                            }
+                        }
                     }
                 }]
             };
             var chart = new ApexCharts(document.querySelector("#category"), options);
             chart.render();
         });
+
 
         document.addEventListener('DOMContentLoaded', function() {
             let data = @json($performance);
@@ -409,7 +445,7 @@
                 chart: {
                     height: 350,
                     width: 700,
-                    type: 'line', 
+                    type: 'line',
                     zoom: {
                         enabled: false
                     }
@@ -431,16 +467,16 @@
                     curve: 'smooth'
                 },
                 xaxis: {
-                    type: 'datetime', 
+                    type: 'datetime',
                     labels: {
                         format: 'dd MMM yyyy',
-                        datetimeUTC: false 
+                        datetimeUTC: false
                     },
-                    tickAmount: 'dataPoints', 
+                    tickAmount: 'dataPoints',
                     tooltip: {
                         enabled: true,
                         formatter: function(val) {
-                            return new Date(val).toLocaleDateString('en-GB'); 
+                            return new Date(val).toLocaleDateString('en-GB');
                         }
                     }
                 },
