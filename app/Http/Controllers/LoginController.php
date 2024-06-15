@@ -13,6 +13,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use App\Models\Siswa;
 use App\Models\Pelanggaran;
 use App\Models\Kategori;
+use App\Models\Kelas;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
@@ -86,6 +87,22 @@ class LoginController extends Controller
 
     public function teacher()
     {
-        return view('teacher.dashboard');
+        $user = Auth::user();
+        $countViolationsUser = Pelanggaran::where('teacher_id', $user->id)->count();
+
+        $countViolations = Pelanggaran::count();
+
+        $countStudents = Siswa::count();
+
+        $countCategories = Kategori::count();
+
+        $countClasses = Kelas::count();
+
+        $performance = Pelanggaran::select(DB::raw('DATE(date) as date'), DB::raw('COUNT(*) as pelanggaran_count'))
+        ->groupBy(DB::raw('DATE(date)'))
+        ->orderBy(DB::raw('DATE(date)'), 'asc')
+        ->get();
+        
+        return view('teacher.dashboard', compact('countViolationsUser', 'countViolations', 'countStudents', 'countCategories', 'countClasses', 'performance'));
     }
 }

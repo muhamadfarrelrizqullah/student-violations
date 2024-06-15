@@ -409,7 +409,7 @@
                 chart: {
                     height: 350,
                     width: 700,
-                    type: 'line',
+                    type: 'line', 
                     zoom: {
                         enabled: false
                     }
@@ -421,14 +421,21 @@
                     curve: 'smooth'
                 },
                 xaxis: {
-                    type: 'datetime',
+                    type: 'datetime', 
                     labels: {
-                        format: 'dd MMM yyyy'
+                        format: 'dd MMM yyyy',
+                        datetimeUTC: false 
+                    },
+                    tickAmount: 'dataPoints', 
+                    tooltip: {
+                        enabled: true,
+                        formatter: function(val) {
+                            return new Date(val).toLocaleDateString('en-GB'); 
+                        }
                     }
                 },
                 yaxis: {
                     min: 0,
-                    max: 10,
                     forceNiceScale: true
                 },
                 tooltip: {
@@ -437,13 +444,13 @@
                     }
                 },
                 responsive: [{
-                    breakpoint: 768, 
+                    breakpoint: 768,
                     options: {
                         chart: {
                             height: 300,
-                            width: '100%', 
+                            width: '100%',
                             toolbar: {
-                                show: false 
+                                show: false
                             }
                         }
                     }

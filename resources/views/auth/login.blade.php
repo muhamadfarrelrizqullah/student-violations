@@ -76,10 +76,6 @@
                                     <input type="password" placeholder="Password" id="password" name="password"
                                         autocomplete="off" class="form-control bg-transparent" />
                                 </div>
-                                <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-                                    <div></div>
-                                    <a href="#" class="link-primary">Forgot Password ?</a>
-                                </div>
                                 <div class="d-grid mb-10">
                                     <button type="submit" class="btn btn-primary">
                                         <span class="indicator-label">Sign In</span>
@@ -98,8 +94,8 @@
                                         class="theme-dark-show h-20px app-sidebar-logo-default" /></a>
                             </div>
                             <div class="d-flex fw-semibold text-primary fs-base gap-5">
-                                <a href="#" target="_blank">Terms</a>
-                                <a href="#" target="_blank">Plans</a>
+                                <a>Terms</a>
+                                <a>Plans</a>
                             </div>
                         </div>
                     </div>

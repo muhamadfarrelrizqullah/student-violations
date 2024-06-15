@@ -180,8 +180,9 @@
                                 </i>
                                 <div class="mb-0">
                                     <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
-                                        <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="{{ $users->count() }}"
-                                            data-kt-countup-suffix="+">0</div>
+                                        <div class="min-w-70px" data-kt-countup="true"
+                                            data-kt-countup-value="{{ $users->count() }}" data-kt-countup-suffix="+">0
+                                        </div>
                                     </div>
                                     <span class="text-gray-600 fw-semibold fs-5 lh-0">Users</span>
                                 </div>
@@ -195,7 +196,8 @@
                                 </i>
                                 <div class="mb-0">
                                     <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
-                                        <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="{{ $violations->count() }}"
+                                        <div class="min-w-70px" data-kt-countup="true"
+                                            data-kt-countup-value="{{ $violations->count() }}"
                                             data-kt-countup-suffix="+">0</div>
                                     </div>
                                     <span class="text-gray-600 fw-semibold fs-5 lh-0">Violations Recorded</span>
@@ -211,7 +213,8 @@
                                 </i>
                                 <div class="mb-0">
                                     <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
-                                        <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="{{ $students->count() }}"
+                                        <div class="min-w-70px" data-kt-countup="true"
+                                            data-kt-countup-value="{{ $students->count() }}"
                                             data-kt-countup-suffix="+">0</div>
                                     </div>
                                     <span class="text-gray-600 fw-semibold fs-5 lh-0">Students</span>
@@ -245,28 +248,26 @@
                             <div class="d-flex justify-content-center">
                                 <div class="d-flex fw-semibold flex-column me-20">
                                     <h4 class="fw-bold text-gray-500 mb-6">More for EduGuard</h4>
-                                    <a href="#"
-                                        class="text-white opacity-50 text-hover-primary fs-5 mb-6">FAQ</a>
-                                    <a href="#"
-                                        class="text-white opacity-50 text-hover-primary fs-5 mb-6">Documentaions</a>
-                                    <a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Video
+                                    <a class="text-white opacity-50 text-hover-primary fs-5 mb-6">FAQ</a>
+                                    <a class="text-white opacity-50 text-hover-primary fs-5 mb-6">Documentaions</a>
+                                    <a class="text-white opacity-50 text-hover-primary fs-5 mb-6">Video
                                         Tutorials</a>
-                                    <a href="#" class="text-white opacity-50 text-hover-primary fs-5">Blog</a>
+                                    <a class="text-white opacity-50 text-hover-primary fs-5">Blog</a>
                                 </div>
                                 <div class="d-flex fw-semibold flex-column ms-lg-20">
                                     <h4 class="fw-bold text-gray-500 mb-6">Stay Connected</h4>
-                                    <a href="#" class="mb-6">
+                                    <a class="mb-6">
                                         <img src="assets/media/svg/brand-logos/github.svg" class="h-20px me-2"
                                             alt="" />
                                         <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Github</span>
                                     </a>
-                                    <a href="#" class="mb-6">
+                                    <a class="mb-6">
                                         <img src="assets/media/svg/brand-logos/dribbble-icon-1.svg"
                                             class="h-20px me-2" alt="" />
                                         <span
                                             class="text-white opacity-50 text-hover-primary fs-5 mb-6">Dribbble</span>
                                     </a>
-                                    <a href="#" class="mb-6">
+                                    <a class="mb-6">
                                         <img src="assets/media/svg/brand-logos/instagram-2-1.svg" class="h-20px me-2"
                                             alt="" />
                                         <span
@@ -281,22 +282,22 @@
                 <div class="container">
                     <div class="d-flex flex-column flex-md-row flex-stack py-7 py-lg-10">
                         <div class="d-flex align-items-center order-2 order-md-1">
-                            <a href="#">
+                            <a href="/">
                                 <img alt="Logo" src="assets/media/logos/landing.png" class="h-15px h-md-20px" />
                             </a>
-                            <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="#">&copy; 2024
+                            <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="/">&copy; 2024
                                 EduGuard</span>
                         </div>
                         <ul
                             class="menu menu-gray-600 menu-hover-primary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
                             <li class="menu-item">
-                                <a href="#" class="menu-link px-2">About</a>
+                                <a class="menu-link px-2">About</a>
                             </li>
                             <li class="menu-item mx-5">
-                                <a href="#" class="menu-link px-2">Support</a>
+                                <a class="menu-link px-2">Support</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#" class="menu-link px-2">Purchase</a>
+                                <a class="menu-link px-2">Purchase</a>
                             </li>
                         </ul>
                     </div>
