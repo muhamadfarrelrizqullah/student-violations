@@ -417,6 +417,16 @@
                 dataLabels: {
                     enabled: false
                 },
+                title: {
+                    text: 'Violations Report',
+                    align: 'center',
+                    margin: 10,
+                    style: {
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                        color: '#000'
+                    }
+                },
                 stroke: {
                     curve: 'smooth'
                 },

@@ -160,6 +160,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('datasanksi') }}",
+                order: [[2, 'asc']],
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
